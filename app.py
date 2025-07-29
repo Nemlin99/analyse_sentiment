@@ -10,15 +10,21 @@ import numpy as np
 
 st.set_page_config(page_title="Analyse des Ressentis clients sur les RS", layout="wide")
 
-# ----------- MENU --------
-st.sidebar.title("📚 Navigation")
-page = st.sidebar.radio("Aller à", [
-    "🏠 Accueil",
-    "📈 Statistiques Générales",
-    "📊 Visualisation",
-    "🔍 Analyse par produits",
-    "📝 Posts"
-])
+# ----------- PAGE ACCUEIL -----------
+if page == "🏠 Accueil":
+    col1, col2 = st.columns([2, 6])
+    with col1:
+        st.image("logo.png", width=200)  # Mets ton propre logo
+    with col2:
+        st.title("Analyse des Ressentis Clients sur les Réseaux Sociaux")
+
+    st.markdown("""
+Bienvenue dans votre tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
+Utilisez le menu à gauche pour explorer :
+- Les KPIs sentimentaux
+- L’analyse des sentiments par produits
+- Les posts récents sur les réseaux sociaux
+""")
 
 # ----------- CHARGEMENT DES DONNÉES -----------
 @st.cache_data

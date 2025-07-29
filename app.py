@@ -21,14 +21,6 @@ page = st.sidebar.radio("Aller à", [
 ])
 
 
-    st.markdown("""
-Bienvenue dans votre tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
-Utilisez le menu à gauche pour explorer :
-- Les KPIs sentimentaux
-- L’analyse des sentiments par produits
-- Les posts récents sur les réseaux sociaux
-""")
-
 # ----------- CHARGEMENT DES DONNÉES -----------
 @st.cache_data
 def load_data():

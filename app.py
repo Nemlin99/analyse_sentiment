@@ -10,7 +10,7 @@ import numpy as np
 from datetime import datetime
 
 
-st.set_page_config(page_title="Analyse des Ressentis clients sur les RS", layout="wide")
+st.set_page_config(page_title="Analyse du Ressenti des clients sur les Réseaux Sociaux", layout="wide")
 
 # ----------- MENU --------
 st.sidebar.title("📚 Navigation")
@@ -67,8 +67,9 @@ if page == "🏠 Accueil":
     st.markdown("""
 Bienvenue dans votre tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
 Utilisez le menu à gauche pour explorer :
-- Les KPIs sentimentaux
-- L’analyse des sentiments par produits
+- Les Statistiquues Générales
+-Une visualisation des différents KPIs
+- L’analyse des ressentis par produits
 - Les posts récents sur les réseaux sociaux
 """)
 

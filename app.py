@@ -20,7 +20,6 @@ page = st.sidebar.radio("Aller à", [
     "📝 Posts"
 ])
 
-
 # ----------- CHARGEMENT DES DONNÉES -----------
 @st.cache_data
 def load_data():
@@ -69,6 +68,7 @@ Utilisez le menu à gauche pour explorer :
 
 # ----------- PAGE DASHBOARD SENTIMENTS -----------
 elif page == "📈 Statistiques Générales":
+
     st.title("📈 Statistiques Générales")
 
     if not df.empty:
@@ -161,21 +161,50 @@ elif page == "📊 Visualisation":
         # st.plotly_chart(fig)
         # st.dataframe(absa_df[['phrase', 'source', 'sentiment']])
 
+        # sources = absa_grouped['source'].unique()
+
+        # for src in sources:
+        subset = absa_grouped[absa_grouped['source'] == "page_sgci"]
+
         fig = px.bar(
-    absa_grouped,
-    x="aspect",
-    y="count",
-    color="sentiment",
-    facet_col="source",
-    barmode="group",
-    title="Comparaison des ressentis clients par aspect et par source",
-    color_discrete_map={
-        "negatif": "red",
-        "neutre": "lightblue",
-        "positif": "green"
-    }
-)
-    st.plotly_chart(fig, use_container_width=True)
+        subset,
+        x="aspect",
+        y="count",
+        color="sentiment",
+        barmode="group",
+        title=f"Ressentis clients - Source : page_sgci",
+        color_discrete_map={
+            "negatif": "red",
+            "neutre": "lightblue",
+            "positif": "green"
+        },
+        width=800,
+        height=500
+    )
+    st.plotly_chart(fig, use_container_width=False)
+
+    aspects = absa_grouped['aspect'].unique()
+
+    for asp in aspects:
+        subset1 = absa_grouped[absa_grouped['aspect'] == asp]
+
+        fig1 = px.bar(
+        subset1,
+        x="source",
+        y="count",
+        color="sentiment",
+        barmode="group",
+        title=f"Ressentis clients - Aspect : {asp}",
+        color_discrete_map={
+            "negatif": "red",
+            "neutre": "lightblue",
+            "positif": "green"
+        },
+        width=800,
+        height=500
+    )
+        st.plotly_chart(fig1, use_container_width=False)
+
     st.subheader("☁️ Nuage de mots des commentaires")
     st.image(wordcloud_img, use_column_width=True)
 

@@ -8,10 +8,17 @@ from PIL import Image
 import plotly.express as px
 import numpy as np
 from datetime import datetime
+<<<<<<< HEAD
+=======
+
+>>>>>>> 3c1ea30 (Ajout de nouveaux fichiers et mise à jour du projet)
 
 
+<<<<<<< HEAD
 st.set_page_config(page_title="Analyse du Ressenti des clients sur les Réseaux Sociaux", layout="wide")
 
+=======
+>>>>>>> 3c1ea30 (Ajout de nouveaux fichiers et mise à jour du projet)
 # ----------- MENU --------
 st.sidebar.title("📚 Navigation")
 page = st.sidebar.radio("Aller à", [

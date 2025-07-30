@@ -7,6 +7,8 @@ import json
 from PIL import Image
 import plotly.express as px
 import numpy as np
+from datetime import datetime
+
 
 st.set_page_config(page_title="Analyse des Ressentis clients sur les RS", layout="wide")
 
@@ -49,7 +51,11 @@ def load_data():
     return df, kpis, absa_df, df_postes,wordcloud_img
 
 df, kpis, absa_df, df_postes,wordcloud_img = load_data()
-
+df, kpis, absa_df, df_postes,wordcloud_img = load_data()
+df = df[
+    (df['date'].dt.date >= datetime(2025, 1, 1).date()) &
+    (df['date'].dt.date <= datetime(2025, 6, 30).date())
+]
 # ----------- PAGE ACCUEIL -----------
 if page == "🏠 Accueil":
     col1, col2 = st.columns([2, 6])

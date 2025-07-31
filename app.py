@@ -357,3 +357,4 @@ elif page == "📝 Posts":
                 st.dataframe(coms[['date', 'commentaire']])
     else:
         st.warning("Aucun post trouvé.")
+        

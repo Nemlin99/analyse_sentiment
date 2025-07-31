@@ -8,17 +8,10 @@ from PIL import Image
 import plotly.express as px
 import numpy as np
 from datetime import datetime
-<<<<<<< HEAD
-=======
+from streamlit_plotly_events import plotly_events
 
->>>>>>> 3c1ea30 (Ajout de nouveaux fichiers et mise à jour du projet)
+st.set_page_config(page_title="Analyse des Ressentis clients sur les RS", layout="wide")
 
-
-<<<<<<< HEAD
-st.set_page_config(page_title="Analyse du Ressenti des clients sur les Réseaux Sociaux", layout="wide")
-
-=======
->>>>>>> 3c1ea30 (Ajout de nouveaux fichiers et mise à jour du projet)
 # ----------- MENU --------
 st.sidebar.title("📚 Navigation")
 page = st.sidebar.radio("Aller à", [
@@ -74,9 +67,9 @@ if page == "🏠 Accueil":
     st.markdown("""
 Bienvenue dans votre tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
 Utilisez le menu à gauche pour explorer :
-- Les Statistiquues Générales
--Une visualisation des différents KPIs
-- L’analyse des ressentis par produits
+- Les KPIs sentimentaux
+- 
+- L’analyse des sentiments par produits
 - Les posts récents sur les réseaux sociaux
 """)
 
@@ -98,18 +91,11 @@ elif page == "📈 Statistiques Générales":
         df = df[(df['date'].dt.date >= start_date) & (df['date'].dt.date <= end_date)]
 
         # Métriques globales
-        st.subheader("📌 Statistiques globales par source")
+        st.subheader("📌 Statistiques globales des commentaires par page")
+            # Calcul des ratios
         total_counts = df.groupby('source').size()
         pos_counts = df[df['sentiment'] == 'POSITIVE'].groupby('source').size()
         neg_counts = df[df['sentiment'] == 'NEGATIVE'].groupby('source').size()
-
-        for source in total_counts.index:
-            col1, col2, col3, col4 = st.columns(4)
-            col1.metric(f"{source} - Total", f"{total_counts[source]}")
-            col2.metric(f"{source} - Positifs", f"{pos_counts.get(source, 0)}")
-            col3.metric(f"{source} - Négatifs", f"{neg_counts.get(source, 0)}")
-
-        # Calcul des ratios
         all_dates = pd.date_range(start=df['date'].min().date(), end=df['date'].max().date(), freq='D')
         multi_index = pd.MultiIndex.from_product([all_dates, df['source'].unique()], names=['date', 'source'])
         daily_counts = df.groupby([df['date'].dt.date, 'source']).size().reindex(multi_index, fill_value=0).unstack()
@@ -123,12 +109,21 @@ elif page == "📈 Statistiques Générales":
         avg_neg = round(daily_neg_counts.mean(), 2)
         neg_ratio = round((avg_neg / avg_comments * 100).fillna(0), 2)
 
+        for source in total_counts.index:
+            col1, col2, col3, col4 = st.columns(4)
+            col1.metric(f"{source} - Total", f"{total_counts[source]}")
+            col2.metric(f"{source} - Commentaires Positifs", f"{pos_counts.get(source, 0)}")
+            col3.metric(f"{source} - Commentaires Négatifs", f"{neg_counts.get(source, 0)}")
+            col4.metric(f"{source} - Taux des Négatifs", f"{neg_ratio.get(source, 0)}%")
+
+
+
         st.subheader("📊 Moyenne des commentaires par Banque")
         for source in avg_comments.index:
             col1, col2, col3 = st.columns(3)
             col1.metric(f"{source} - /jour", f"{avg_comments[source]}")
             col2.metric(f"{source} - Négatifs /jour", f"{avg_neg.get(source, 0)}")
-            col3.metric(f"{source} - % Négatifs", f"{neg_ratio.get(source, 0)}%")
+            
 
 
 
@@ -137,7 +132,7 @@ elif page == "📈 Statistiques Générales":
 
 # ----------- PAGE VISUALISATION GLOBALE -----------
 elif page == "📊 Visualisation":
-    st.title("📊 Visualisation des ressentis clients")
+    st.title("📊 Visualisation du ressenti des clients")
     absa_grouped = absa_df.groupby(['source', 'aspect', 'sentiment']).size().reset_index(name='count')
 
     if not df.empty:
@@ -157,13 +152,65 @@ elif page == "📊 Visualisation":
         daily_counts = df.groupby([df['date'].dt.date, 'source']).size().reindex(multi_index, fill_value=0).unstack()
         daily_neg_counts = df[df['sentiment'] == 'NEGATIVE'].groupby([df['date'].dt.date, 'source']).size().reindex(multi_index, fill_value=0).unstack()
 
-        st.subheader("📉 Commentaires totaux par source et jour")
-        tot_count = df.groupby(['date', 'source']).size().reset_index(name='tot_count')
-        fig_tot = px.bar(tot_count, x='date', y='tot_count', color='source', barmode='group')
-        st.plotly_chart(fig_tot, use_container_width=True)
+        # st.subheader("📉 Commentaires totaux par source et jour")
+        # couleurs_fixes = {"NEGATIVE": "red","POSITIVE": "green"}
+        # tot_count = df[df['source']=="page_sgci"].groupby(['date', 'sentiment']).size().reset_index(name='tot_count')
+        # fig_tot = px.bar(tot_count, x='date', y='tot_count', color='sentiment',color_discrete_map=couleurs_fixes, barmode='group')
+        # st.plotly_chart(fig_tot, use_container_width=True)
         detra = daily_neg_counts / daily_counts.replace(0, np.nan)
         promo = 1 - detra
         nps = promo - detra
+
+
+# Couleurs fixes
+        
+
+        st.subheader("📉 Commentaires totaux par sentiment- Page-SGCI")
+        couleurs_fixes = {"negatif": "red", "positif": "green"}
+
+# Données agrégées
+        tot_count = absa_df[absa_df['source'] == "page_sgci"].groupby(['date', 'sentiment']).size().reset_index(name='tot_count')
+
+# Premier graphique : sentiment par date
+        fig_tot = px.bar(
+                tot_count,
+                x='date',
+                y='tot_count',
+                color='sentiment',
+                color_discrete_map=couleurs_fixes,
+                barmode='group'
+                )
+
+# Récupère les clics utilisateur
+        selected_points = plotly_events(fig_tot, click_event=True, select_event=False)
+
+# Affiche le premier graphique
+        #st.plotly_chart(fig_tot, use_container_width=True)
+
+# Deuxième graphique : aspects pour la date sélectionnée
+        if selected_points:
+            selected_date = selected_points[0]['x']  # x = date cliquée
+            st.info(f"📅 Date sélectionnée : {selected_date}")
+            absa_df_sgci = absa_df[absa_df['source'] == "page_sgci"]
+
+    # Filtrage dans absa_df
+            filtered_absa = absa_df_sgci[absa_df_sgci['date'] == selected_date]
+
+            if filtered_absa.empty:
+                st.warning("Aucun commentaire trouvé pour cette date dans absa_df.")
+            else:
+        # Regrouper par aspect
+                aspect_count = filtered_absa.groupby('aspect').size().reset_index(name='nb_commentaires')
+
+                fig_aspects = px.bar(
+            aspect_count,
+            x='aspect',
+            y='nb_commentaires',
+            color='aspect',
+            title=f"Commentaires par aspect le {selected_date}"
+        )
+
+                st.plotly_chart(fig_aspects, use_container_width=True)
 
         st.subheader("📉 Évolution du proxy NPS")
         nps_reset = nps.reset_index().melt(id_vars='date', var_name='source', value_name='NPS').dropna()
@@ -232,12 +279,14 @@ elif page == "🔍 Analyse par produits":
         st.subheader("🔍 Filtrer les commentaires")
 
     # Interface de filtre
-        col1, col2, col3 = st.columns(3)
+        col1, col2, col3, col4 = st.columns(4)
         with col1:
-            source_filter = st.selectbox("Source", ["Toutes"] + sorted(absa_df['source'].unique()), key="filt_source")
+            date_filter = st.selectbox("Date", ["Toutes"] + sorted(absa_df['date'].unique()), key="filt_date")
         with col2:
-            aspect_filter = st.selectbox("Aspect", ["Tous"] + sorted(absa_df['aspect'].unique()), key="filt_aspect")
+            source_filter = st.selectbox("Source", ["Toutes"] + sorted(absa_df['source'].unique()), key="filt_source")
         with col3:
+            aspect_filter = st.selectbox("Aspect", ["Tous"] + sorted(absa_df['aspect'].unique()), key="filt_aspect")
+        with col4:
             sentiment_filter = st.selectbox("Sentiment", ["Tous", "positif", "negatif"], key="filt_sentiment")
 
     # Application des filtres (en mémoire uniquement)
@@ -248,6 +297,9 @@ elif page == "🔍 Analyse par produits":
             filtered_df = filtered_df[filtered_df['aspect'] == aspect_filter]
         if sentiment_filter != "Tous":
             filtered_df = filtered_df[filtered_df['sentiment'] == sentiment_filter]
+        if date_filter != "Toutes":
+            filtered_df = filtered_df[filtered_df["date"] == date_filter]
+
 
     # Partie dynamique uniquement ici
         st.subheader("📝 Commentaires filtrés")

@@ -56,6 +56,8 @@ df = df[
     (df['date'].dt.date >= datetime(2025, 1, 1).date()) &
     (df['date'].dt.date <= datetime(2025, 6, 30).date())
 ]
+
+absa_df['date'] = pd.to_datetime(absa_df['date'], errors='coerce')
 # ----------- PAGE ACCUEIL -----------
 if page == "🏠 Accueil":
     col1, col2 = st.columns([2, 6])

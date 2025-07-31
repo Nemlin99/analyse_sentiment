@@ -22,7 +22,7 @@ page = st.sidebar.radio("Aller à", [
     "🏠 Accueil",
     "📈 Statistiques Générales",
     "📊 Visualisation",
-    "🔍 Analyse par produits",
+    "🔍 Détails des commentaires",
     "📝 Posts"
 ])
 
@@ -272,8 +272,8 @@ elif page == "📊 Visualisation":
     st.image(wordcloud_img, use_column_width=True)
 
 # ----------- PAGE ABSA -----------
-elif page == "🔍 Analyse par produits":
-    st.title("🔍 Analyse du resenti des  clients par produits et par banques")
+elif page == "🔍 Détails des commentaires":
+    st.title("🔍 Exploration des commentaires")
 
     #absa_grouped = absa_df.groupby(['source', 'aspect', 'sentiment']).size().reset_index(name='count')
 

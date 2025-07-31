@@ -21,7 +21,7 @@ st.sidebar.title("📚 Navigation")
 page = st.sidebar.radio("Aller à", [
     "🏠 Accueil",
     "📈 Statistiques Générales",
-    "📊 Visualisation",
+    "📊 Visualisations",
     "🔍 Détails des commentaires",
     "📝 Posts divers sur nos produits/services"
 ])
@@ -134,8 +134,8 @@ elif page == "📈 Statistiques Générales":
         st.warning("Aucune donnée chargée.")
 
 # ----------- PAGE VISUALISATION GLOBALE -----------
-elif page == "📊 Visualisation":
-    st.title("📊 Visualisation du ressenti des clients")
+elif page == "📊 Visualisations":
+    st.title("📊 Visualisations du ressenti des clients")
     absa_grouped = absa_df.groupby(['source', 'aspect', 'sentiment']).size().reset_index(name='count')
 
     if not df.empty:

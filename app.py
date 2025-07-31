@@ -71,7 +71,7 @@ if page == "🏠 Accueil":
     st.markdown("""
 Bienvenue dans le tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
 Utilisez le menu à gauche pour explorer :
-- Les Statistiques Générales et l visulisation de différents KPIs
+- Les Statistiques Générales et la visulisation de différents KPIs
 - L’analyse des sentiments par produits
 - Les posts récents sur les réseaux sociaux
 """)

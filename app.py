@@ -1,6 +1,3 @@
-import os
-os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"
-
 import streamlit as st
 import pandas as pd
 import json
@@ -62,18 +59,14 @@ if page == "🏠 Accueil":
     with col1:
         st.image("logo.png", width=200)  # Mets ton propre logo
     with col2:
-        st.title("Analyse du Ressenti des clients sur les Réseaux Sociaux")
+        st.title("Analyse des Ressentis Clients sur les Réseaux Sociaux")
 
     st.markdown("""
 Bienvenue dans votre tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
 Utilisez le menu à gauche pour explorer :
-<<<<<<< HEAD
 - Les KPIs sentimentaux
 - 
 - L’analyse des sentiments par produits
-=======
-- Les Statistiquues Générales et la visualisation des KPIs
-- L’analyse des ressentis par produits 
 - Les posts récents sur les réseaux sociaux
 """)
 

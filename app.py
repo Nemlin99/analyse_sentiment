@@ -168,30 +168,45 @@ elif page == "📊 Visualisation":
         st.subheader("📉 Commentaires totaux par sentiment- Page-SGCI")
         couleurs_fixes = {"negatif": "red", "positif": "green"}
 
-# Données agrégées
-        # Filtrage
+# Calculer les totaux comme avant
         df_sgci = absa_df[absa_df['source'] == "page_sgci"].copy()
-
-# Sécurité sur types
         df_sgci['date'] = pd.to_datetime(df_sgci['date'], errors='coerce')
         df_sgci['sentiment'] = df_sgci['sentiment'].str.lower().str.strip()
 
-# Groupement robuste
-        tot_count = df_sgci.groupby(['date', 'sentiment']).agg(nb_commentaires=('sentiment', 'count')).reset_index()
+        tot_count = df_sgci.groupby(['date', 'sentiment']).size().reset_index(name='nb_commentaires')
+        tot_count = tot_count.sort_values(by='date')
 
-# Tri
-#tot_count = tot_count.sort_values('date')
-
-# Visualisation
+# Afficher le graphique principal
         fig_tot = px.bar(
-        tot_count,
-        x='date',
+    tot_count,
+    x='date',
+    y='nb_commentaires',
+    color='sentiment',
+    color_discrete_map={"negatif": "red", "positif": "green"},
+    barmode='group',
+    title="Commentaires par date et sentiment (page_sgci)"
+)
+        st.plotly_chart(fig_tot, use_container_width=True)
+
+# ✅ Interface alternative : sélection manuelle de la date
+        dates_disponibles = sorted(df_sgci['date'].dropna().dt.date.unique())
+        selected_date = st.selectbox("📅 Choisir une date pour explorer les aspects :", dates_disponibles)
+
+# Affichage conditionnel
+        filtered_absa = df_sgci[df_sgci['date'].dt.date == selected_date]
+        if filtered_absa.empty:
+            st.warning("Aucun commentaire trouvé pour cette date.")
+        else:
+            aspect_count = filtered_absa.groupby('aspect').size().reset_index(name='nb_commentaires')
+            fig_aspects = px.bar(
+        aspect_count,
+        x='aspect',
         y='nb_commentaires',
-        color='sentiment',
-        color_discrete_map= couleurs_fixes,
-        barmode='group'
+        color='aspect',
+        title=f"Commentaires par aspect le {selected_date}"
     )
-# st.plotly_chart(fig_tot, use_container_width=True)
+            st.plotly_chart(fig_aspects, use_container_width=True)
+
 
 
 # # Premier graphique : sentiment par date
@@ -205,35 +220,35 @@ elif page == "📊 Visualisation":
 #                 )
 
 # Récupère les clics utilisateur
-        selected_points = plotly_events(fig_tot, click_event=True, select_event=False)
+#         selected_points = plotly_events(fig_tot, click_event=True, select_event=False)
 
-# Affiche le premier graphique
-        #st.plotly_chart(fig_tot, use_container_width=True)
+# # Affiche le premier graphique
+#         #st.plotly_chart(fig_tot, use_container_width=True)
 
-# Deuxième graphique : aspects pour la date sélectionnée
-        if selected_points:
-            selected_date = selected_points[0]['x']  # x = date cliquée
-            st.info(f"📅 Date sélectionnée : {selected_date}")
-            absa_df_sgci = absa_df[absa_df['source'] == "page_sgci"]
+# # Deuxième graphique : aspects pour la date sélectionnée
+#         if selected_points:
+#             selected_date = selected_points[0]['x']  # x = date cliquée
+#             st.info(f"📅 Date sélectionnée : {selected_date}")
+#             absa_df_sgci = absa_df[absa_df['source'] == "page_sgci"]
 
-    # Filtrage dans absa_df
-            filtered_absa = absa_df_sgci[absa_df_sgci['date'] == selected_date]
+#     # Filtrage dans absa_df
+#             filtered_absa = absa_df_sgci[absa_df_sgci['date'] == selected_date]
 
-            if filtered_absa.empty:
-                st.warning("Aucun commentaire trouvé pour cette date dans absa_df.")
-            else:
-        # Regrouper par aspect
-                aspect_count = filtered_absa.groupby('aspect').size().reset_index(name='nb_commentaires')
+#             if filtered_absa.empty:
+#                 st.warning("Aucun commentaire trouvé pour cette date dans absa_df.")
+        #     else:
+        # # Regrouper par aspect
+        #         aspect_count = filtered_absa.groupby('aspect').size().reset_index(name='nb_commentaires')
 
-                fig_aspects = px.bar(
-            aspect_count,
-            x='aspect',
-            y='nb_commentaires',
-            color='aspect',
-            title=f"Commentaires par aspect le {selected_date}"
-        )
+        #         fig_aspects = px.bar(
+        #     aspect_count,
+        #     x='aspect',
+        #     y='nb_commentaires',
+        #     color='aspect',
+        #     title=f"Commentaires par aspect le {selected_date}"
+        # )
 
-                st.plotly_chart(fig_aspects, use_container_width=True)
+        #         st.plotly_chart(fig_aspects, use_container_width=True)
 
         st.subheader("📉 Évolution du proxy NPS")
         nps_reset = nps.reset_index().melt(id_vars='date', var_name='source', value_name='NPS').dropna()

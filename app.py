@@ -23,7 +23,7 @@ page = st.sidebar.radio("Aller à", [
     "📈 Statistiques Générales",
     "📊 Visualisation",
     "🔍 Détails des commentaires",
-    "📝 Posts"
+    "📝 Posts divers sur nos produits/services"
 ])
 
 # ----------- CHARGEMENT DES DONNÉES -----------
@@ -308,8 +308,8 @@ elif page == "🔍 Détails des commentaires":
         st.dataframe(filtered_df, use_container_width=True)
 
 # ----------- PAGE POSTS -----------
-elif page == "📝 Posts":
-    st.title("📝 Posts récents sur la SGCI dans le groupe Observatoire Libre des Banques")
+elif page == "📝 Posts divers sur nos produits/services":
+    st.title("📝 Posts récents sur nos produits/services dans le groupe Observatoire Libre des Banques")
     if not df_postes.empty:
         for source in df_postes['source'].unique():
             st.subheader(f"📢 {source}")

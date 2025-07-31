@@ -169,17 +169,40 @@ elif page == "📊 Visualisation":
         couleurs_fixes = {"negatif": "red", "positif": "green"}
 
 # Données agrégées
-        tot_count = absa_df[absa_df['source'] == "page_sgci"].groupby(['date', 'sentiment']).size().reset_index(name='tot_count')
+        # Filtrage
+        df_sgci = absa_df[absa_df['source'] == "page_sgci"].copy()
 
-# Premier graphique : sentiment par date
+# Sécurité sur types
+        df_sgci['date'] = pd.to_datetime(df_sgci['date'], errors='coerce')
+        df_sgci['sentiment'] = df_sgci['sentiment'].str.lower().str.strip()
+
+# Groupement robuste
+        tot_count = df_sgci.groupby(['date', 'sentiment']).agg(nb_commentaires=('sentiment', 'count')).reset_index()
+
+# Tri
+#tot_count = tot_count.sort_values('date')
+
+# Visualisation
         fig_tot = px.bar(
-                tot_count,
-                x='date',
-                y='tot_count',
-                color='sentiment',
-                color_discrete_map=couleurs_fixes,
-                barmode='group'
-                )
+        tot_count,
+        x='date',
+        y='nb_commentaires',
+        color='sentiment',
+        color_discrete_map= couleurs_fixes,
+        barmode='group'
+    )
+# st.plotly_chart(fig_tot, use_container_width=True)
+
+
+# # Premier graphique : sentiment par date
+#         fig_tot = px.bar(
+#                 tot_count,
+#                 x='date',
+#                 y='tot_count',
+#                 color='sentiment',
+#                 color_discrete_map=couleurs_fixes,
+#                 barmode='group'
+#                 )
 
 # Récupère les clics utilisateur
         selected_points = plotly_events(fig_tot, click_event=True, select_event=False)

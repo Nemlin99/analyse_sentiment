@@ -1,6 +1,9 @@
 import os
 os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"
 
+import os
+os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"
+
 import streamlit as st
 import pandas as pd
 import json
@@ -65,10 +68,9 @@ if page == "🏠 Accueil":
         st.title("Analyse du Ressenti des Clients sur les Réseaux Sociaux")
 
     st.markdown("""
-Bienvenue dans votre tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
+Bienvenue dans le tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
 Utilisez le menu à gauche pour explorer :
-- Les KPIs sentimentaux
-- 
+- Les Statistiques Générales et l visulisation de différents KPIs
 - L’analyse des sentiments par produits
 - Les posts récents sur les réseaux sociaux
 """)
@@ -165,7 +167,7 @@ elif page == "📊 Visualisation":
 # Couleurs fixes
         
 
-        st.subheader("📉 Commentaires totaux par sentiment- Page-SGCI")
+        st.subheader("📉 Ressenti des clients au cours du temps- Page-SGCI")
         couleurs_fixes = {"negatif": "red", "positif": "green"}
 
 # Données agrégées
@@ -258,7 +260,6 @@ elif page == "📊 Visualisation":
         title=f"Ressentis clients - Aspect : {asp}",
         color_discrete_map={
             "negatif": "red",
-            "neutre": "lightblue",
             "positif": "green"
         },
         width=800,
@@ -271,7 +272,7 @@ elif page == "📊 Visualisation":
 
 # ----------- PAGE ABSA -----------
 elif page == "🔍 Analyse par produits":
-    st.title("🔍 Analyse des resentis clients par produits et par banques")
+    st.title("🔍 Analyse du resenti des  clients par produits et par banques")
 
     #absa_grouped = absa_df.groupby(['source', 'aspect', 'sentiment']).size().reset_index(name='count')
 

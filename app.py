@@ -1,10 +1,6 @@
 import os
 os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"
 
-import os
-os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"
-
-
 import streamlit as st
 import pandas as pd
 import json
@@ -21,9 +17,9 @@ st.sidebar.title("📚 Navigation")
 page = st.sidebar.radio("Aller à", [
     "🏠 Accueil",
     "📈 Statistiques Générales",
-    "📊 Visualisations",
-    "🔍 Détails des commentaires",
-    "📝 Posts divers sur nos produits/services"
+    "📊 Visualisation",
+    "🔍 Analyse par produits",
+    "📝 Posts"
 ])
 
 # ----------- CHARGEMENT DES DONNÉES -----------
@@ -69,9 +65,9 @@ if page == "🏠 Accueil":
         st.title("Analyse du Ressenti des Clients sur les Réseaux Sociaux")
 
     st.markdown("""
-Bienvenue dans le tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
+Bienvenue dans votre tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
 Utilisez le menu à gauche pour explorer :
-- Les Statistiques Générales et la visulisation de différents KPIs
+- Les Statistiques Générales et l visulisation de différents KPIs
 - L’analyse des sentiments par produits
 - Les posts récents sur les réseaux sociaux
 """)
@@ -134,8 +130,8 @@ elif page == "📈 Statistiques Générales":
         st.warning("Aucune donnée chargée.")
 
 # ----------- PAGE VISUALISATION GLOBALE -----------
-elif page == "📊 Visualisations":
-    st.title("📊 Visualisations du ressenti des clients")
+elif page == "📊 Visualisation":
+    st.title("📊 Visualisation du ressenti des clients")
     absa_grouped = absa_df.groupby(['source', 'aspect', 'sentiment']).size().reset_index(name='count')
 
     if not df.empty:
@@ -272,8 +268,8 @@ elif page == "📊 Visualisations":
     st.image(wordcloud_img, use_column_width=True)
 
 # ----------- PAGE ABSA -----------
-elif page == "🔍 Détails des commentaires":
-    st.title("🔍 Exploration des commentaires")
+elif page == "🔍 Analyse par produits":
+    st.title("🔍 Analyse du resenti des  clients par produits et par banques")
 
     #absa_grouped = absa_df.groupby(['source', 'aspect', 'sentiment']).size().reset_index(name='count')
 
@@ -305,11 +301,11 @@ elif page == "🔍 Détails des commentaires":
 
     # Partie dynamique uniquement ici
         st.subheader("📝 Commentaires filtrés")
-        st.dataframe(filtered_df, use_container_width=True)
+        st.dataframe(filtered_df[["source","date","phrase","aspect"]], use_container_width=True)
 
 # ----------- PAGE POSTS -----------
-elif page == "📝 Posts divers sur nos produits/services":
-    st.title("📝 Posts récents sur nos produits/services dans le groupe Observatoire Libre des Banques")
+elif page == "📝 Posts":
+    st.title("📝 Posts récents sur la SGCI dans le groupe Observatoire Libre des Banques")
     if not df_postes.empty:
         for source in df_postes['source'].unique():
             st.subheader(f"📢 {source}")

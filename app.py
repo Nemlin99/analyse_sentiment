@@ -127,8 +127,8 @@ elif page == "📈 Statistiques Générales":
         for source in total_counts.index:
             col1, col2, col3, col4,col5,col6 = st.columns(6)
             col1.metric(f"{source} - Total", f"{total_counts[source]}")
-            col2.metric(" - 😁", f"{pos_counts.get(source, 0)}")
-            col3.metric(" - 😠", f"{neg_counts.get(source, 0)}")
+            col2.metric(" - 😍😊💕", f"{pos_counts.get(source, 0)}")
+            col3.metric(" - 🤬😡🥵", f"{neg_counts.get(source, 0)}")
             col4.metric(" % Négatifs", f"{neg_ratio.get(source, 0)}%")
             col5.metric("Moy./jour", f"{avg_comments[source]}")
             col6.metric(" Moy.Négatifs/jour", f"{avg_neg.get(source, 0)}")

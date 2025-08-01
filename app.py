@@ -11,6 +11,7 @@ import plotly.express as px
 import numpy as np
 from datetime import datetime
 from streamlit_plotly_events import plotly_events
+import base64
 
 st.set_page_config(page_title="Analyse des Ressentis clients sur les RS", layout="wide")
 
@@ -54,10 +55,10 @@ def load_data():
 
 df, kpis, absa_df, df_postes,wordcloud_img = load_data()
 df, kpis, absa_df, df_postes,wordcloud_img = load_data()
-df = df[
-    (df['date'].dt.date >= datetime(2025, 1, 1).date()) &
-    (df['date'].dt.date <= datetime(2025, 6, 30).date())
-]
+# df = df[
+#     (df['date'].dt.date >= datetime(2025, 1, 1).date()) &
+#     (df['date'].dt.date <= datetime(2025, 6, 30).date())
+# ]
 # ----------- PAGE ACCUEIL -----------
 if page == "🏠 Accueil":
     col1, col2 = st.columns([2, 6])
@@ -73,6 +74,19 @@ Utilisez le menu à gauche pour explorer :
 - L’analyse des sentiments par produits
 - Les posts récents sur les réseaux sociaux
 """)
+    
+    # def get_base64_image(image_path):
+    #     with open(image_path, "rb") as f:
+    #         data=f.read()
+    #     return base64.b64encode(data).decode("utf-8")
+    
+    # logo = get_base64_image("qr_code_lien.png")
+    # st.markdown(f"""
+    #             <div style="texte-align: center; margin-top: 40px;">
+    #                 <img src="data:image/png;base64,{logo}" width="200">
+    #             </div>
+    #             """, unsafe_allow_html=True
+    #             )
 
 # ----------- PAGE DASHBOARD SENTIMENTS -----------
 elif page == "📈 Statistiques Générales":
@@ -92,7 +106,7 @@ elif page == "📈 Statistiques Générales":
         df = df[(df['date'].dt.date >= start_date) & (df['date'].dt.date <= end_date)]
 
         # Métriques globales
-        st.subheader("📌 Statistiques globales des commentaires par page")
+        st.subheader("📌 Analyse Concurrentielle Digitale: Statistiques Globales")
             # Calcul des ratios
         total_counts = df.groupby('source').size()
         pos_counts = df[df['sentiment'] == 'POSITIVE'].groupby('source').size()
@@ -111,19 +125,21 @@ elif page == "📈 Statistiques Générales":
         neg_ratio = round((avg_neg / avg_comments * 100).fillna(0), 2)
 
         for source in total_counts.index:
-            col1, col2, col3, col4 = st.columns(4)
+            col1, col2, col3, col4,col5,col6 = st.columns(6)
             col1.metric(f"{source} - Total", f"{total_counts[source]}")
-            col2.metric(f"{source} - Commentaires Positifs", f"{pos_counts.get(source, 0)}")
-            col3.metric(f"{source} - Commentaires Négatifs", f"{neg_counts.get(source, 0)}")
-            col4.metric(f"{source} - Taux des Négatifs", f"{neg_ratio.get(source, 0)}%")
+            col2.metric(" - 😁", f"{pos_counts.get(source, 0)}")
+            col3.metric(" - 😠", f"{neg_counts.get(source, 0)}")
+            col4.metric(" % Négatifs", f"{neg_ratio.get(source, 0)}%")
+            col5.metric("Moy./jour", f"{avg_comments[source]}")
+            col6.metric(" Moy.Négatifs/jour", f"{avg_neg.get(source, 0)}")
 
 
 
-        st.subheader("📊 Moyenne des commentaires par Banque")
-        for source in avg_comments.index:
-            col1, col2, col3 = st.columns(3)
-            col1.metric(f"{source} - /jour", f"{avg_comments[source]}")
-            col2.metric(f"{source} - Négatifs /jour", f"{avg_neg.get(source, 0)}")
+        # st.subheader("📊 Moyenne des commentaires par Banque")
+        # for source in avg_comments.index:
+        #     col1, col2, col3 = st.columns(3)
+        #     col1.metric(f"{source} - /jour", f"{avg_comments[source]}")
+        #     col2.metric(f"{source} - Négatifs /jour", f"{avg_neg.get(source, 0)}")
             
 
 

@@ -322,9 +322,13 @@ elif page == "🔍 Détails des commentaires":
         st.dataframe(filtered_df, use_container_width=True)
 
 # ----------- PAGE POSTS -----------
-elif page == "📝 Posts divers sur nos produits/services":
-    st.title("📝 Posts récents sur nos produits/services dans le groupe Observatoire Libre des Banques")
+elif page == "📝 Posts":
+    st.title("📝 Posts récents sur la SGCI dans le groupe Observatoire Libre des Banques")
     if not df_postes.empty:
+        df_postes['date'] = pd.to_datetime(df_postes['date'], errors='coerce')
+
+        # 2. Suppression des lignes avec dates invalides
+        df_postes = df_postes.dropna(subset=['date'])
         for source in df_postes['source'].unique():
             st.subheader(f"📢 {source}")
             posts = df_postes[df_postes['source'] == source].groupby('poste').first().reset_index()

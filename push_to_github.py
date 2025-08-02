@@ -34,7 +34,7 @@ def main():
         return
 
     # ✅ Étape 3 : choisir la branche (optionnel)
-    branch = input("\n🌿 Entrez le nom de la branche (par défaut: main) : ").strip() or "main"
+    branch = "main"
 
     # ✅ Étape 4 : push vers GitHub
     try:

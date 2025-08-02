@@ -322,7 +322,7 @@ elif page == "🔍 Détails des commentaires":
         st.dataframe(filtered_df, use_container_width=True)
 
 # ----------- PAGE POSTS -----------
-elif page == "📝 Posts":
+elif page == "📝 Posts divers sur nos produits/services":
     st.title("📝 Posts récents sur la SGCI dans le groupe Observatoire Libre des Banques")
     if not df_postes.empty:
         #df_postes['date'] = pd.to_datetime(df_postes['date'], errors='coerce')

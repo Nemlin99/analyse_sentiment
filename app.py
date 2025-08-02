@@ -1,4 +1,8 @@
 
+import os
+os.environ["STREAMLIT_SERVER_FILE_WATCHER_TYPE"] = "none"
+
+
 import streamlit as st
 import pandas as pd
 import json
@@ -64,7 +68,7 @@ if page == "🏠 Accueil":
         st.title("Analyse du Ressenti des Clients sur les Réseaux Sociaux")
 
     st.markdown("""
-Bienvenue dans votre tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
+Bienvenue dans le tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
 Utilisez le menu à gauche pour explorer :
 - Les Statistiques Générales et la visulisation de différents KPIs
 - L’analyse des sentiments par produits
@@ -315,7 +319,7 @@ elif page == "🔍 Détails des commentaires":
 
     # Partie dynamique uniquement ici
         st.subheader("📝 Commentaires filtrés")
-        st.dataframe(filtered_df[["source","date","phrase","aspect"]], use_container_width=True)
+        st.dataframe(filtered_df, use_container_width=True)
 
 # ----------- PAGE POSTS -----------
 elif page == "📝 Posts divers sur nos produits/services":
@@ -324,7 +328,7 @@ elif page == "📝 Posts divers sur nos produits/services":
         #df_postes['date'] = pd.to_datetime(df_postes['date'], errors='coerce')
 
         # 2. Suppression des lignes avec dates invalides
-        df_postes = df_postes.dropna(subset=['date'])
+        #df_postes = df_postes.dropna(subset=['date'])
         for source in df_postes['source'].unique():
             st.subheader(f"📢 {source}")
             posts = df_postes[df_postes['source'] == source].groupby('poste').first().reset_index()

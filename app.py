@@ -325,7 +325,7 @@ elif page == "🔍 Détails des commentaires":
 elif page == "📝 Posts":
     st.title("📝 Posts récents sur la SGCI dans le groupe Observatoire Libre des Banques")
     if not df_postes.empty:
-        df_postes['date'] = pd.to_datetime(df_postes['date'], errors='coerce')
+        #df_postes['date'] = pd.to_datetime(df_postes['date'], errors='coerce')
 
         # 2. Suppression des lignes avec dates invalides
         df_postes = df_postes.dropna(subset=['date'])

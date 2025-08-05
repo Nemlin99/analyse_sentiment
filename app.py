@@ -332,6 +332,7 @@ elif page == "📝 Posts divers sur nos produits/services":
         for source in df_postes['source'].unique():
             st.subheader(f"📢 {source}")
             posts = df_postes[df_postes['source'] == source].groupby('poste').first().reset_index()
+            posts = posts.sort_values(by='date', ascending=False)
             for _, row in posts.iterrows():
                 st.markdown(f"** {row['date']}📝 Post :** {row['poste']}")
                 coms = df_postes[(df_postes['source'] == source) & (df_postes['poste'] == row['poste'])]

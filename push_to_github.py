@@ -8,7 +8,8 @@ def main():
         "absa_df.csv",
         "kpis.json",
         "push_to_github.py",
-        "postes.csv"
+        "postes.csv",
+        "app.py"
     ]
 
     # ✅ Étape 1 : ajouter les fichiers sélectionnés

@@ -65,10 +65,10 @@ if page == "🏠 Accueil":
     with col1:
         st.image("logo.png", width=200)  # Mets ton propre logo
     with col2:
-        st.title("Analyse du Ressenti des Clients sur les Réseaux Sociaux")
+        st.title(" 🕷️ SpyMarketBank-SG")
 
     st.markdown("""
-Bienvenue dans le tableau de bord d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
+Bienvenue dans notre thermomètre d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
 Utilisez le menu à gauche pour explorer :
 - Les Statistiques Générales et la visulisation de différents KPIs
 - L’analyse des sentiments par produits

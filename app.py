@@ -70,7 +70,7 @@ if page == "🏠 Accueil":
     st.markdown("""
 Bienvenue dans notre thermomètre d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
 Utilisez le menu à gauche pour explorer :
-- Les Statistiques Générales et la visulisation de différents KPIs
+- Les Statistiques Générales et la visualisation de différents KPIs
 - L’analyse des sentiments par produits
 - Les posts récents sur les réseaux sociaux
 """)

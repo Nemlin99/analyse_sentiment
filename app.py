@@ -319,7 +319,7 @@ elif page == "🔍 Détails des commentaires":
 
     # Partie dynamique uniquement ici
         st.subheader("📝 Commentaires filtrés")
-        st.dataframe(filtered_df, use_container_width=True)
+        st.dataframe(filtered_df[["date","auteur","phrase","aspect"]], use_container_width=True,hide_index=True)
 
 # ----------- PAGE POSTS -----------
 elif page == "📝 Posts divers sur nos produits/services":
@@ -335,7 +335,7 @@ elif page == "📝 Posts divers sur nos produits/services":
             posts = df_postes[df_postes['source'] == source].groupby('poste').first().reset_index()
             posts = posts.sort_values(by='date_post', ascending=False)
             for _, row in posts.iterrows():
-                st.markdown(f"** {row['date_post']}📝 Post :** {row['poste']}")
+                st.markdown(f"** {row['date_post']} - Auteur:  {row['auteur']} 📝 Post :** {row['poste']}")
                 coms = df_postes[(df_postes['source'] == source) & (df_postes['poste'] == row['poste'])]
                 st.write("💬 Commentaires associés :")
                 st.dataframe(coms[['date', 'commentaire']])

@@ -60,33 +60,33 @@ df, kpis, absa_df, df_postes,wordcloud_img = load_data()
 #     (df['date'].dt.date <= datetime(2025, 6, 30).date())
 # ]
 # ----------- PAGE ACCUEIL -----------
+import streamlit as st
+import streamlit.components.v1 as components
+
+# ----------- PAGE ACCUEIL -----------
 if page == "🏠 Accueil":
     col1, col2 = st.columns([2, 6])
     with col1:
-        st.image("logo.png", width=200)  # Mets ton propre logo
+        st.image("logo.png", width=200)
     with col2:
         st.title(" 🕷️ SpyMarketBank-SG")
 
     st.markdown("""
-Bienvenue dans notre thermomètre d'analyse de l'image de marque sur les réseaux sociaux(Facebook).
+Bienvenue dans notre thermomètre d'analyse de l'image de marque sur les réseaux sociaux (Facebook).
 Utilisez le menu à gauche pour explorer :
 - Les Statistiques Générales et la visualisation de différents KPIs
 - L’analyse des sentiments par produits
 - Les posts récents sur les réseaux sociaux
 """)
-    
-    # def get_base64_image(image_path):
-    #     with open(image_path, "rb") as f:
-    #         data=f.read()
-    #     return base64.b64encode(data).decode("utf-8")
-    
-    # logo = get_base64_image("qr_code_lien.png")
-    # st.markdown(f"""
-    #             <div style="texte-align: center; margin-top: 40px;">
-    #                 <img src="data:image/png;base64,{logo}" width="200">
-    #             </div>
-    #             """, unsafe_allow_html=True
-    #             )
+
+    # Widget IA flottant
+    # convai_floating = """
+    # <div style="position: fixed; bottom: 20px; right: 20px; z-index: 9999;">
+    #     <elevenlabs-convai agent-id="agent_01jz38fs57ehpsyecm8tcvfevm"></elevenlabs-convai>
+    #     <script src="https://unpkg.com/@elevenlabs/convai-widget-embed" async></script>
+    # </div>
+    # """
+    # components.html(convai_floating, height=600)
 
 # ----------- PAGE DASHBOARD SENTIMENTS -----------
 elif page == "📈 Statistiques Générales":

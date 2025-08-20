@@ -12,6 +12,7 @@ import numpy as np
 from datetime import datetime
 from streamlit_plotly_events import plotly_events
 import base64
+import datetime as dt
 
 st.set_page_config(page_title="Analyse des Ressentis clients sur les RS", layout="wide")
 
@@ -99,7 +100,7 @@ elif page == "📈 Statistiques Générales":
         df = df[df['source'].isin(source_select)]
 
         st.sidebar.write("### Filtrer par date")
-        min_date = df['date'].min().date()
+        min_date = dt.date(2025, 1, 1)
         max_date = df['date'].max().date()
         start_date = st.sidebar.date_input("Date de début", min_date)
         end_date = st.sidebar.date_input("Date de fin", max_date)
@@ -158,7 +159,7 @@ elif page == "📊 Visualisations":
         df = df[df['source'].isin(source_select)]
 
         st.sidebar.write("### Filtrer par date")
-        min_date = df['date'].min().date()
+        min_date = dt.date(2025, 1, 1)
         max_date = df['date'].max().date()
         start_date = st.sidebar.date_input("Date de début", min_date)
         end_date = st.sidebar.date_input("Date de fin", max_date)

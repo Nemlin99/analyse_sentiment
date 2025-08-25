@@ -23,7 +23,8 @@ page = st.sidebar.radio("Aller à", [
     "📈 Statistiques Générales",
     "📊 Visualisations",
     "🔍 Détails des commentaires",
-    "📝 Posts divers sur nos produits/services"
+    "📝 Posts divers sur nos produits/services"#,
+    #"🤖 Chatbot IA"
 ])
 
 # ----------- CHARGEMENT DES DONNÉES -----------
@@ -64,6 +65,22 @@ df, kpis, absa_df, df_postes,wordcloud_img = load_data()
 import streamlit as st
 import streamlit.components.v1 as components
 
+# ----------- Fonction pour interroger LLaMA local (via Ollama CLI) -----------
+import subprocess
+
+def query_llama(prompt, model="llama3"):
+    try:
+        result = subprocess.run(
+            ["ollama", "run", model],
+            input=prompt.encode("utf-8"),
+            capture_output=True,
+            timeout=30
+        )
+        output = result.stdout.decode("utf-8").strip()
+        return output
+    except Exception as e:
+        return f"⚠️ Erreur LLaMA : {e}"
+    
 # ----------- PAGE ACCUEIL -----------
 if page == "🏠 Accueil":
     col1, col2 = st.columns([2, 6])
@@ -342,3 +359,33 @@ elif page == "📝 Posts divers sur nos produits/services":
                 st.dataframe(coms[['date', 'commentaire']])
     else:
         st.warning("Aucun post trouvé.")
+
+
+
+# # ----------- PAGE CHATBOT --------
+# elif page == "🤖 Chatbot IA":
+#     st.title("🤖 Assistant IA (LLaMA3)")
+
+#     # ---- État de la conversation ----
+#     if "chat_history" not in st.session_state:
+#         st.session_state.chat_history = []
+
+#     # Zone de saisie utilisateur
+#     user_input = st.chat_input("💬 Posez votre question :")
+
+#     if user_input:
+#         # Stocker l’utilisateur immédiatement
+#         st.session_state.chat_history.append(("user", user_input))
+        
+#         # Générer la réponse
+#         response = query_llama(user_input)
+#         st.session_state.chat_history.append(("assistant", response))
+
+#     # Affichage du chat avec bulles
+#     for role, msg in st.session_state.chat_history:
+#         if role == "user":
+#             with st.chat_message("user"):
+#                 st.markdown(msg)
+#         else:
+#             with st.chat_message("assistant"):
+#                 st.markdown(msg)

@@ -356,7 +356,7 @@ elif page == "📝 Posts divers sur nos produits/services":
                 st.markdown(f"** {row['date_post']} - Auteur:  {row['auteur']} 📝 Post :** {row['poste']}")
                 coms = df_postes[(df_postes['source'] == source) & (df_postes['poste'] == row['poste'])]
                 st.write("💬 Commentaires associés :")
-                st.dataframe(coms[['date', 'commentaire']])
+                st.dataframe(coms[['date','auteur_com', 'commentaire']])
     else:
         st.warning("Aucun post trouvé.")
 

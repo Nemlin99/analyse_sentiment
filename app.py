@@ -24,7 +24,7 @@ page = st.sidebar.radio("Aller à", [
     "📊 Visualisations",
     "🔍 Détails des commentaires",
     "📝 Posts divers sur nos produits/services"#,
-    #"🤖 Chatbot IA"
+    # "🤖 Chatbot IA"
 ])
 
 # ----------- CHARGEMENT DES DONNÉES -----------
@@ -364,21 +364,30 @@ elif page == "📝 Posts divers sur nos produits/services":
 
 # # ----------- PAGE CHATBOT --------
 # elif page == "🤖 Chatbot IA":
-#     st.title("🤖 Assistant IA (LLaMA3)")
+#     st.title("🤖 Assistant Marketing IA")
 
 #     # ---- État de la conversation ----
 #     if "chat_history" not in st.session_state:
 #         st.session_state.chat_history = []
 
 #     # Zone de saisie utilisateur
-#     user_input = st.chat_input("💬 Posez votre question :")
+#     user_input = st.chat_input("💬 Posez votre question marketing :")
 
 #     if user_input:
-#         # Stocker l’utilisateur immédiatement
+#         # Stocker immédiatement la question de l’utilisateur
 #         st.session_state.chat_history.append(("user", user_input))
         
-#         # Générer la réponse
-#         response = query_llama(user_input)
+#         # Générer une réponse contextualisée (toujours en français)
+#         prompt = f"""
+#         Tu es un assistant virtuel spécialisé en **marketing bancaire et digital**. 
+#         Tes réponses doivent être **en français**, claires et pédagogiques. 
+#         Sois structuré et donne des exemples concrets quand c’est pertinent. 
+#         Voici la question de l’utilisateur : {user_input}
+#         """
+
+#         response = query_llama(prompt)
+
+#         # Stocker la réponse
 #         st.session_state.chat_history.append(("assistant", response))
 
 #     # Affichage du chat avec bulles
@@ -389,3 +398,4 @@ elif page == "📝 Posts divers sur nos produits/services":
 #         else:
 #             with st.chat_message("assistant"):
 #                 st.markdown(msg)
+

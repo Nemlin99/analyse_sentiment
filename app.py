@@ -371,7 +371,7 @@ elif page == "📝 Posts divers sur nos produits/services":
 #         st.session_state.chat_history = []
 
 #     # Zone de saisie utilisateur
-#     user_input = st.chat_input("💬 Posez votre question marketing :")
+#     user_input = st.chat_input("💬 Posez votre question :")
 
 #     if user_input:
 #         # Stocker immédiatement la question de l’utilisateur

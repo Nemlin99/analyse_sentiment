@@ -444,8 +444,47 @@ def filter_details(date_filter, source_filter, aspect_filter, sentiment_filter):
     return filtered_df[["date", "auteur", "phrase", "aspect"]].to_dict("records")
 
 
-# ========================
 # 5. Lancement
 # ========================
 if __name__ == "__main__":
     app.run(debug=True, port=8050)
+
+
+# # ----------- PAGE CHATBOT --------
+# elif page == "🤖 Chatbot IA":
+#     st.title("🤖 Assistant Marketing IA")
+
+#     # ---- État de la conversation ----
+#     if "chat_history" not in st.session_state:
+#         st.session_state.chat_history = []
+
+#     # Zone de saisie utilisateur
+#     user_input = st.chat_input("💬 Posez votre question :")
+
+#     if user_input:
+#         # Stocker immédiatement la question de l’utilisateur
+#         st.session_state.chat_history.append(("user", user_input))
+        
+#         # Générer une réponse contextualisée (toujours en français)
+#         prompt = f"""
+#         Tu es un assistant virtuel spécialisé en **marketing bancaire et digital**. 
+#         Tes réponses doivent être **en français**, claires et pédagogiques. 
+#         Sois structuré et donne des exemples concrets quand c’est pertinent. 
+#         Voici la question de l’utilisateur : {user_input}
+#         """
+
+#         response = query_llama(prompt)
+
+#         # Stocker la réponse
+#         st.session_state.chat_history.append(("assistant", response))
+
+#     # Affichage du chat avec bulles
+#     for role, msg in st.session_state.chat_history:
+#         if role == "user":
+#             with st.chat_message("user"):
+#                 st.markdown(msg)
+#         else:
+#             with st.chat_message("assistant"):
+#                 st.markdown(msg)
+
+

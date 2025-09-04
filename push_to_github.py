@@ -7,7 +7,7 @@ def main():
         "wordcloud.png",
         "absa_df.csv",
         "kpis.json",
-        "push_to_github.py",
+        # "push_to_github.py",
         "postes.csv",
         "app.py"
     ]

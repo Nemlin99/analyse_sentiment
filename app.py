@@ -186,6 +186,7 @@ def render_page(tab):
         ])
 
     elif tab == "details":
+        absa_df["date"] = absa_df["date"].sort_values(ascending=False)
         if absa_df.empty:
             return html.Div("⚠️ Pas de commentaires disponibles.")
 
@@ -340,7 +341,7 @@ def maj_stats(sources, start_date, end_date):
     metrics = []
     for src in total_counts.index:
         metrics.append(html.Div([
-                html.H4(src),
+                html.H4(f"Commentaires {src}"),
                 html.P(f"Total: {total_counts[src]}"),
                 html.P(f"😍😊💕: {pos_counts.get(src, 0)}"),
                 html.P(f"🤬😡🥵: {neg_counts.get(src, 0)}"),

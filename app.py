@@ -93,26 +93,28 @@ def render_page(tab):
     global df_postes
     if tab == "home":
         return html.Div([
+
+            # Logo + Titre
             html.Div([
-                # Logo à gauche
                 html.Div([
-                    html.Img(src="assets/logo.png", style={"width": "200px"})
+                    html.Img(src="assets/logo.png", style={"width": "250px"})
                 ], style={"display": "inline-block", "verticalAlign": "top", "marginRight": "20px"}),
 
-                # Titre à droite
                 html.Div([
-                    html.H1("🕷️ SpyMarketBank-SG")
-                ], style={"display": "inline-block", "verticalAlign": "top"})
-            ], style={"marginBottom": "20px"}),
+                    html.H1("🕷️ SpyMarketBank-SG", style={"fontSize": "54px", "fontWeight": "bold"})
+                ], style={"display": "inline-block", "verticalAlign": "middle"})
+            ], style={"marginBottom": "40px"}),
 
-            # Texte descriptif en dessous
+            # Texte descriptif
             html.Div([
-                html.P("Bienvenue dans notre thermomètre d'analyse de l'image de marque sur les réseaux sociaux (Facebook)."),
-                html.P("Utilisez le menu à gauche pour explorer :"),
+                html.P("Bienvenue dans notre thermomètre d'analyse de l'image de marque sur les réseaux sociaux (Facebook).",
+                       style={"fontSize": "28px"}),
+                html.P("Utilisez le menu à gauche pour explorer :",
+                       style={"fontSize": "28px"}),
                 html.Ul([
-                    html.Li("Les Statistiques Générales et la visualisation de différents KPIs"),
-                    html.Li("L’analyse des sentiments par produits"),
-                    html.Li("Les posts récents sur les réseaux sociaux")
+                    html.Li("Les Statistiques Générales et la visualisation de différents KPIs", style={"fontSize": "26px"}),
+                    html.Li("L’analyse des sentiments par produits", style={"fontSize": "26px"}),
+                    html.Li("Les posts récents sur les réseaux sociaux", style={"fontSize": "26px"})
                 ])
             ])
         ])

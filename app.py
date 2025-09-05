@@ -75,7 +75,7 @@ app.layout = html.Div([
     dcc.Tabs(id="tabs", value="home", children=[
         dcc.Tab(label="🏠 Accueil", value="home"),
         dcc.Tab(label="📈 Statistiques Générales", value="stats"),
-        dcc.Tab(label="📊 Visualisations", value="viz"),
+        dcc.Tab(label="📊 Analyses Graphiques", value="viz"),
         dcc.Tab(label="🔍 Détails des commentaires", value="details"),
         dcc.Tab(label="📝 Posts divers", value="posts"),
     ]),
@@ -107,9 +107,9 @@ def render_page(tab):
 
             # Texte descriptif
             html.Div([
-                html.P("Bienvenue dans notre thermomètre d'analyse de l'image de marque sur les réseaux sociaux (Facebook).",
+                html.H3("Bienvenue dans notre thermomètre d'analyse de l'image de marque sur les réseaux sociaux.",
                        style={"fontSize": "28px"}),
-                html.P("Utilisez le menu à gauche pour explorer :",
+                html.P("Utilisez le menu au dessus pour explorer :",
                        style={"fontSize": "28px"}),
                 html.Ul([
                     html.Li("Les Statistiques Générales et la visualisation de différents KPIs", style={"fontSize": "26px"}),

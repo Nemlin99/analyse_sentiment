@@ -168,9 +168,10 @@ def render_page(tab):
             ], style={"width": "40%", "margin": "20px"}),
 
             html.H3("📉 Évolution des sentiments"),
+            html.Div(id="nouveau-graphique"),
             dcc.Graph(id="viz-sentiments"),
             # Div vide pour le nouveau graphique créé au clic
-            html.Div(id="nouveau-graphique"),
+            
 
             html.H3("📉 Évolution du proxy NPS"),
             dcc.Graph(id="viz-nps"),

@@ -151,7 +151,7 @@ def render_page(tab):
             return html.Div("⚠️ Pas de données pour les visualisations.")
 
         return html.Div([
-            html.H2("📊 Visualisations du ressenti des clients"),
+            html.H2("📊 Analyse graphique du ressenti des clients"),
 
             html.Div([
                 html.Label("Filtrer par source :"),
@@ -178,10 +178,10 @@ def render_page(tab):
             html.H3("📉 Évolution du proxy NPS"),
             dcc.Graph(id="viz-nps"),
 
-            html.H3("📊 Répartition des aspects par source"),
+            html.H3("📊 Répartition des commentaires par typologie et par banque"),
             dcc.Graph(id="viz-aspects"),
 
-            html.H3("☁️ Nuage de mots"),
+            html.H3("☁️ Nuage de mots des commentaires négatifs sur la SGCI"),
             html.Img(
                 src="data:image/png;base64," + wordcloud_base64,
                 style={"width": "50%", "border": "1px solid #ddd"}
@@ -390,14 +390,22 @@ def maj_viz(sources, start_date, end_date):
     detra = daily_neg_counts / daily_counts.replace(0, np.nan)
     promo = 1 - detra
     nps = promo - detra
-    nps_reset = nps.reset_index().melt(id_vars="date", var_name="source", value_name="NPS").dropna()
-    fig_nps = px.line(nps_reset, x="date", y="NPS", color="source")
+    nps_reset = nps.reset_index().melt(id_vars="date", var_name="source", value_name="Proxy NPS").dropna()
+    fig_nps = px.line(nps_reset, x="date", y="Proxy NPS", color="source")
+    # Ligne horizontale au niveau de 0
+    fig_nps.add_hline(
+    y=0, 
+    line_dash="solid",   # ligne continue
+    line_color="black",  # noir foncé
+    line_width=2         # plus épaisse
+    )
 
     # === Graphique aspects ===
     absa_grouped = absa_df[absa_df["source"].isin(sources)].groupby(["source", "aspect", "sentiment"]).size().reset_index(name="count")
     fig_aspects = px.bar(absa_grouped, x="aspect", y="count", color="sentiment",
                          barmode="group", facet_col="source",
-                         color_discrete_map={"negatif": "red", "positif": "green"})
+                         color_discrete_map={"negatif": "red", "positif": "green"},
+                         labels={"aspect": "Typologie", "count": "Nombre"})
 
     return fig_sentiments, fig_nps, fig_aspects
 
@@ -408,7 +416,7 @@ def maj_viz(sources, start_date, end_date):
 )
 def creer_nouveau_graph(clickData, sources):
     if not clickData or not sources:
-        return html.Div("📌 Cliquez sur une barre pour afficher les aspects de cette date.")
+        return html.Div("📌 Cliquez sur une barre pour plus de details sur les commentaires à cette date")
 
     # Récupère la date cliquée
     selected_date = clickData['points'][0]['x']
@@ -422,7 +430,13 @@ def creer_nouveau_graph(clickData, sources):
 
     # Crée un nouveau graphique
     fig_aspects = px.bar(aspect_count, x='aspect', y='nb_commentaires', color='aspect',
-                         title=f"Commentaires par aspect le {selected_date}")
+                         title=f"Commentaires par typologie le {selected_date}",
+                         labels={'aspect': 'Typologie', 'nb_commentaires': 'Nombre de commentaires'},
+                         text='nb_commentaires')
+    fig_aspects.update_traces(
+    # textposition='outside',
+    textfont=dict(color='black', size=14, family='Arial', weight='bold')
+    )
 
     return dcc.Graph(figure=fig_aspects)
 

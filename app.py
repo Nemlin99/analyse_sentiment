@@ -103,19 +103,32 @@ def render_page(tab):
                 html.Div([
                     html.H1("🕷️ SpyMarketBank-SG", style={"fontSize": "54px", "fontWeight": "bold"})
                 ], style={"display": "inline-block", "verticalAlign": "middle"})
-            ], style={"marginBottom": "40px"}),
+            ], style={"marginBottom": "40px", "textAlign": "center"}),
 
             # Texte descriptif
             html.Div([
-                html.H3("Bienvenue dans notre thermomètre d'analyse de l'image de marque sur les réseaux sociaux.",
-                       style={"fontSize": "28px"}),
-                html.P("Utilisez le menu au dessus pour explorer :",
-                       style={"fontSize": "28px"}),
-                html.Ul([
-                    html.Li("Les Statistiques Générales et la visualisation de différents KPIs", style={"fontSize": "26px"}),
-                    html.Li("L’analyse des sentiments par produits", style={"fontSize": "26px"}),
-                    html.Li("Les posts récents sur les réseaux sociaux", style={"fontSize": "26px"})
-                ])
+                html.H3("Bienvenue dans notre thermomètre d'analyse de l'image de marque sur les réseaux sociaux(Facebook).",
+                       style={"fontSize": "28px", "textAlign": "center"}),
+
+                # html.P("Utilisez le menu au-dessus pour explorer :",
+                #        style={"fontSize": "28px", "textAlign": "center"}),
+
+                # html.Ul([
+                #     html.Li("Les Statistiques Générales et la visualisation de différents KPIs", style={"fontSize": "26px"}),
+                #     html.Li("L’analyse des sentiments par produits", style={"fontSize": "26px"}),
+                #     html.Li("Les posts récents sur les réseaux sociaux", style={"fontSize": "26px"})
+                # ], style={"width": "70%", "margin": "auto"})  # centrer la liste
+            ], style={"marginBottom": "50px"}),
+
+            # Nouveau bloc résumé centré
+            html.Div([
+                html.P(
+                    "Cette application a pour objectif d’aider à comprendre la perception de l’image de marque "
+                    "de la banques à travers l’analyse des commentaires et postes sur les Réseaux sociaux. "
+                    "Elle fournit une vision claire des tendances, des sentiments exprimés par les clients,et des leviers  "
+                    "d’amélioration pour renforcer la réputation de la banque et l’expérience de nos clients.",
+                    style={"fontSize": "20px", "textAlign": "center", "maxWidth": "900px", "margin": "auto","marginTop": "80px" }
+                )
             ])
         ])
 
@@ -143,8 +156,17 @@ def render_page(tab):
                 )
             ], style={"width": "40%", "margin": "20px"}),
 
-            html.Div(id="stats-metrics", style={"display":"flex","flex-wrap":"wrap"})
-        ])
+            html.Div(id="stats-metrics", style={"display":"flex","flex-wrap":"wrap"}),
+
+            html.Div([
+            html.P("😍😊💕 : représente le nombre de commentaires positifs sur la période", style={"fontSize": "15px", "marginTop": "40px"}),
+            html.P("🤬😡🥵 : représente le nombre de commentaires négatifs sur la période", style={"fontSize": "15px"}),
+            html.P("% Négatifs : Ratio entre le nombre de commentaires négatifs et le nombre de commentaires positifs", style={"fontSize": "15px"}),
+            html.P("Moy./jour : Total des commentaires sur le nombre de jours de la période", style={"fontSize": "15px"}),
+            html.P("Moy.Négatifs/jour : Total des commentaires négatifs sur le nombre de jours de la période", style={"fontSize": "15px"})
+        ], style={"maxWidth": "900px", "margin": "40px 0 0 0"})  # aligné à gauche par défaut
+    ])
+        
 
     elif tab == "viz":
         if df.empty or absa_df.empty:
@@ -197,71 +219,83 @@ def render_page(tab):
             html.H2("🔍 Exploration des commentaires"),
 
             html.H4("🔍 Filtrer les commentaires"),
-            html.Div([
-                # Date
-                html.Div([
-                    html.Label("Date"),
-                    dcc.Dropdown(
-                        id="details-date",
-                        options=[{"label": "Toutes", "value": "Toutes"}] +
-                                [{"label": d, "value": d} for d in sorted(absa_df['date'].unique())],
-                        value="Toutes",
-                        clearable=False,
-                        style={"width": "100%"}
-                    )
-                ], style={"width": "24%", "display": "inline-block", "padding": "0 5px"}),
+                    html.Div([
+                        # Card autour des filtres
+                        html.Div([
+                            # Date
+                            html.Div([
+                                html.Label("Date", style={"fontWeight": "bold"}),
+                                dcc.Dropdown(
+                                    id="details-date",
+                                    options=[{"label": "Toutes", "value": "Toutes"}] +
+                                            [{"label": d, "value": d} for d in sorted(absa_df['date'].unique())],
+                                    value="Toutes",
+                                    clearable=False,
+                                    style={"width": "100%"}
+                                )
+                            ], style={"width": "24%", "display": "inline-block", "padding": "10px"}),
 
-                # Source
-                html.Div([
-                    html.Label("Source"),
-                    dcc.Dropdown(
-                        id="details-source",
-                        options=[{"label": "Toutes", "value": "Toutes"}] +
-                                [{"label": s, "value": s} for s in sorted(absa_df['source'].unique())],
-                        value="Toutes",
-                        clearable=False,
-                        style={"width": "100%"}
-                    )
-                ], style={"width": "24%", "display": "inline-block", "padding": "0 5px"}),
+                            # Source
+                            html.Div([
+                                html.Label("Source", style={"fontWeight": "bold"}),
+                                dcc.Dropdown(
+                                    id="details-source",
+                                    options=[{"label": "Toutes", "value": "Toutes"}] +
+                                            [{"label": s, "value": s} for s in sorted(absa_df['source'].unique())],
+                                    value="Toutes",
+                                    clearable=False,
+                                    style={"width": "100%"}
+                                )
+                            ], style={"width": "24%", "display": "inline-block", "padding": "10px"}),
 
-                # Aspect
-                html.Div([
-                    html.Label("Aspect"),
-                    dcc.Dropdown(
-                        id="details-aspect",
-                        options=[{"label": "Tous", "value": "Tous"}] +
-                                [{"label": a, "value": a} for a in sorted(absa_df['aspect'].unique())],
-                        value="Tous",
-                        clearable=False,
-                        style={"width": "100%"}
-                    )
-                ], style={"width": "24%", "display": "inline-block", "padding": "0 5px"}),
+                            # Aspect
+                            html.Div([
+                                html.Label("Aspect", style={"fontWeight": "bold"}),
+                                dcc.Dropdown(
+                                    id="details-aspect",
+                                    options=[{"label": "Tous", "value": "Tous"}] +
+                                            [{"label": a, "value": a} for a in sorted(absa_df['aspect'].unique())],
+                                    value="Tous",
+                                    clearable=False,
+                                    style={"width": "100%"}
+                                )
+                            ], style={"width": "24%", "display": "inline-block", "padding": "10px"}),
 
-                # Sentiment
-                html.Div([
-                    html.Label("Sentiment"),
-                    dcc.Dropdown(
-                        id="details-sentiment",
-                        options=[
-                            {"label": "Tous", "value": "Tous"},
-                            {"label": "positif", "value": "positif"},
-                            {"label": "negatif", "value": "negatif"}
-                        ],
-                        value="Tous",
-                        clearable=False,
-                        style={"width": "100%"}
+                            # Sentiment
+                            html.Div([
+                                html.Label("Sentiment", style={"fontWeight": "bold"}),
+                                dcc.Dropdown(
+                                    id="details-sentiment",
+                                    options=[
+                                        {"label": "Tous", "value": "Tous"},
+                                        {"label": "positif", "value": "positif"},
+                                        {"label": "negatif", "value": "negatif"}
+                                    ],
+                                    value="Tous",
+                                    clearable=False,
+                                    style={"width": "100%"}
+                                )
+                            ], style={"width": "20%", "display": "inline-block", "padding": "10px"}),
+                        ], style={
+                            "backgroundColor": "#f9f9f9",
+                            "padding": "15px",
+                            "borderRadius": "12px",
+                            "boxShadow": "0 4px 6px rgba(0,0,0,0.1)",
+                            "marginBottom": "20px",
+                            "display": "flex",
+                            "flexWrap": "wrap",
+                            "justifyContent": "space-between"
+                        })
+                    ]),
+                    html.H4("📝 Commentaires filtrés"),
+                    dash_table.DataTable(
+                        id="details-table",
+                    columns=[{"name": i, "id": i} for i in absa_df[["date", "auteur", "phrase", "aspect"]].columns],
+                    page_size=10,
+                    style_table={"overflowX": "auto"},
+                    style_cell={"textAlign": "left", "padding": "5px"},
+                    style_header={"backgroundColor": "#f1f1f1", "fontWeight": "bold"}
                     )
-                ], style={"width": "24%", "display": "inline-block", "padding": "0 5px"}),
-            ], style={"margin-bottom": "20px"}),
-
-            html.H4("📝 Commentaires filtrés"),
-            dash_table.DataTable(
-                id="details-table",
-                columns=[{"name": i, "id": i} for i in absa_df[["date", "auteur", "phrase", "aspect"]].columns],
-                page_size=10,
-                style_table={"overflowX": "auto"},
-                style_cell={"textAlign": "left", "padding": "5px"},
-            )
         ])
 
     elif tab == "posts":

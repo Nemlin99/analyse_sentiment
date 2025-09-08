@@ -211,6 +211,7 @@ def render_page(tab):
         ])
 
     elif tab == "details":
+        # absa_df["date"] = pd.to_datetime(absa_df["date"]).dt.date
         absa_df["date"] = absa_df["date"].sort_values(ascending=False)
         if absa_df.empty:
             return html.Div("⚠️ Pas de commentaires disponibles.")

@@ -451,7 +451,7 @@ def maj_viz(sources, start_date, end_date):
 )
 def creer_nouveau_graph(clickData, sources):
     if not clickData or not sources:
-        return html.Div("📌 Cliquez sur une barre pour plus de details sur les commentaires à cette date")
+        return html.Div("📌 Cliquez sur une barre pour afficher plus de details contextuels")
 
     # Récupère la date cliquée
     selected_date = clickData['points'][0]['x']
@@ -464,12 +464,12 @@ def creer_nouveau_graph(clickData, sources):
     aspect_count = filtered_absa.groupby('aspect').size().reset_index(name='nb_commentaires')
 
     # Crée un nouveau graphique
-    fig_aspects = px.bar(aspect_count, x='aspect', y='nb_commentaires', color='aspect',
+    fig_aspects = px.bar(aspect_count, x='aspect', y='nb_commentaires', 
                          title=f"Commentaires par typologie le {selected_date}",
                          labels={'aspect': 'Typologie', 'nb_commentaires': 'Nombre de commentaires'},
-                         text='nb_commentaires')
+                         text='nb_commentaires',color_discrete_sequence=["#8B0000"] )
     fig_aspects.update_traces(
-    # textposition='outside',
+    #  textposition='outside',
     textfont=dict(color='black', size=14, family='Arial', weight='bold')
     )
 

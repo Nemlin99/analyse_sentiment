@@ -251,12 +251,12 @@ def render_page(tab):
 
                             # Aspect
                             html.Div([
-                                html.Label("Aspect", style={"fontWeight": "bold"}),
+                                html.Label("Typologie", style={"fontWeight": "bold"}),
                                 dcc.Dropdown(
                                     id="details-aspect",
-                                    options=[{"label": "Tous", "value": "Tous"}] +
+                                    options=[{"label": "Toutes", "value": "Toutes"}] +
                                             [{"label": a, "value": a} for a in sorted(absa_df['aspect'].unique())],
-                                    value="Tous",
+                                    value="Toutes",
                                     clearable=False,
                                     style={"width": "100%"}
                                 )
@@ -487,7 +487,7 @@ def filter_details(date_filter, source_filter, aspect_filter, sentiment_filter):
 
     if source_filter != "Toutes":
         filtered_df = filtered_df[filtered_df['source'] == source_filter]
-    if aspect_filter != "Tous":
+    if aspect_filter != "Toutes":
         filtered_df = filtered_df[filtered_df['aspect'] == aspect_filter]
     if sentiment_filter != "Tous":
         filtered_df = filtered_df[filtered_df['sentiment'] == sentiment_filter]

@@ -124,7 +124,7 @@ def render_page(tab):
             html.Div([
                 html.P(
                     "Cette application a pour objectif d’aider à comprendre la perception de l’image de marque "
-                    "de la banques à travers l’analyse des commentaires et postes sur les Réseaux sociaux. "
+                    "de la banque à travers l’analyse des commentaires et posts sur les Réseaux sociaux. "
                     "Elle fournit une vision claire des tendances, des sentiments exprimés par les clients,et des leviers  "
                     "d’amélioration pour renforcer la réputation de la banque et l’expérience de nos clients.",
                     style={"fontSize": "20px", "textAlign": "center", "maxWidth": "900px", "margin": "auto","marginTop": "80px" }

@@ -417,7 +417,7 @@ def maj_viz(sources, start_date, end_date):
         return {}, {}, {}
 
     # === Graphique sentiments ===
-    tot_count = absa_filtered[absa_filtered['source'].isin(sources)].groupby(
+    tot_count = absa_filtered[absa_filtered['source']== "page_sgci"].groupby(
         ['date', 'sentiment']
     ).size().reset_index(name='tot_count')
 
@@ -443,7 +443,7 @@ def maj_viz(sources, start_date, end_date):
     fig_nps.add_hline(y=0, line_dash="solid", line_color="black", line_width=2)
 
     # === Graphique aspects ===
-    absa_grouped = absa_filtered[absa_filtered["source"].isin(sources)].groupby(
+    absa_grouped = absa_filtered[absa_filtered["source"]== "page_sgci"].groupby(
         ["source", "aspect", "sentiment"]
     ).size().reset_index(name="count")
 

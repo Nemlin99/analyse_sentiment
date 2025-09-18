@@ -90,7 +90,7 @@ app.layout = html.Div([
     Input("tabs", "value")
 )
 def render_page(tab):
-    global df_postes
+    global df_postes,absa_df
     if tab == "home":
         return html.Div([
 
@@ -400,6 +400,8 @@ def maj_stats(sources, start_date, end_date):
      Input("viz-filtre-date", "end_date")]
 )
 def maj_viz(sources, start_date, end_date):
+    global absa_df  
+    
     if not sources:
         return {}, {}, {}
 
@@ -408,39 +410,49 @@ def maj_viz(sources, start_date, end_date):
     dff = dff[(dff["date"].dt.date >= pd.to_datetime(start_date).date()) &
               (dff["date"].dt.date <= pd.to_datetime(end_date).date())]
 
-    if dff.empty:
+    absa_filtered = absa_df[(absa_df["date"].dt.date >= pd.to_datetime(start_date).date()) &
+                            (absa_df["date"].dt.date <= pd.to_datetime(end_date).date())]
+
+    if dff.empty or absa_filtered.empty:
         return {}, {}, {}
 
     # === Graphique sentiments ===
-    tot_count = absa_df[absa_df['source'].isin(sources)].groupby(['date', 'sentiment']).size().reset_index(name='tot_count')
+    tot_count = absa_filtered[absa_filtered['source'].isin(sources)].groupby(
+        ['date', 'sentiment']
+    ).size().reset_index(name='tot_count')
+
     couleurs_fixes = {"negatif": "red", "positif": "green"}
-    fig_sentiments = px.bar(tot_count, x="date", y="tot_count", color="sentiment",
-                            barmode="group", color_discrete_map=couleurs_fixes)
+    fig_sentiments = px.bar(
+        tot_count, x="date", y="tot_count", color="sentiment",
+        barmode="group", color_discrete_map=couleurs_fixes
+    )
 
     # === Proxy NPS ===
     all_dates = pd.date_range(start=dff["date"].min().date(), end=dff["date"].max().date(), freq="D")
     multi_index = pd.MultiIndex.from_product([all_dates, dff["source"].unique()], names=["date", "source"])
+
     daily_counts = dff.groupby([dff["date"].dt.date, "source"]).size().reindex(multi_index, fill_value=0).unstack()
     daily_neg_counts = dff[dff["sentiment"] == "NEGATIVE"].groupby([dff["date"].dt.date, "source"]).size().reindex(multi_index, fill_value=0).unstack()
+
     detra = daily_neg_counts / daily_counts.replace(0, np.nan)
     promo = 1 - detra
     nps = promo - detra
     nps_reset = nps.reset_index().melt(id_vars="date", var_name="source", value_name="Proxy NPS").dropna()
+
     fig_nps = px.line(nps_reset, x="date", y="Proxy NPS", color="source")
-    # Ligne horizontale au niveau de 0
-    fig_nps.add_hline(
-    y=0, 
-    line_dash="solid",   # ligne continue
-    line_color="black",  # noir foncé
-    line_width=2         # plus épaisse
-    )
+    fig_nps.add_hline(y=0, line_dash="solid", line_color="black", line_width=2)
 
     # === Graphique aspects ===
-    absa_grouped = absa_df[absa_df["source"].isin(sources)].groupby(["source", "aspect", "sentiment"]).size().reset_index(name="count")
-    fig_aspects = px.bar(absa_grouped, x="aspect", y="count", color="sentiment",
-                         barmode="group", facet_col="source",
-                         color_discrete_map={"negatif": "red", "positif": "green"},
-                         labels={"aspect": "Typologie", "count": "Nombre"})
+    absa_grouped = absa_filtered[absa_filtered["source"].isin(sources)].groupby(
+        ["source", "aspect", "sentiment"]
+    ).size().reset_index(name="count")
+
+    fig_aspects = px.bar(
+        absa_grouped, x="aspect", y="count", color="sentiment",
+        barmode="group", facet_col="source",
+        color_discrete_map={"negatif": "red", "positif": "green"},
+        labels={"aspect": "Typologie", "count": "Nombre"}
+    )
 
     return fig_sentiments, fig_nps, fig_aspects
 

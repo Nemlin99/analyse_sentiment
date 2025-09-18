@@ -191,7 +191,7 @@ def render_page(tab):
                 )
             ], style={"width": "40%", "margin": "20px"}),
 
-            html.H3("📉 Évolution des sentiments"),
+            html.H3("📉 Évolution du réssenti des clients pour la page SGCI"),
             html.Div(id="nouveau-graphique"),
             dcc.Graph(id="viz-sentiments"),
             # Div vide pour le nouveau graphique créé au clic
@@ -443,7 +443,7 @@ def maj_viz(sources, start_date, end_date):
     fig_nps.add_hline(y=0, line_dash="solid", line_color="black", line_width=2)
 
     # === Graphique aspects ===
-    absa_grouped = absa_filtered[absa_filtered["source"]== "page_sgci"].groupby(
+    absa_grouped = absa_filtered[absa_filtered["source"].isin(sources)].groupby(
         ["source", "aspect", "sentiment"]
     ).size().reset_index(name="count")
 

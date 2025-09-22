@@ -94,20 +94,20 @@ def render_page(tab):
     if tab == "home":
         return html.Div([
 
-            # Logo + Titre
+            # # Logo + Titre
             html.Div([
-                html.Div([
-                    html.Img(src="assets/logo.png", style={"width": "250px"})
-                ], style={"display": "inline-block", "verticalAlign": "top", "marginRight": "20px"}),
+                # html.Div([
+                #     html.Img(src="assets/logo.png", style={"width": "250px"})
+                # ], style={"display": "inline-block", "verticalAlign": "top", "marginRight": "20px"}),
 
                 html.Div([
-                    html.H1("🕷️ SpyMarketBank-SG", style={"fontSize": "54px", "fontWeight": "bold"})
+                    html.H1("🕷️ SpyMarketBank", style={"fontSize": "54px", "fontWeight": "bold"})
                 ], style={"display": "inline-block", "verticalAlign": "middle"})
             ], style={"marginBottom": "40px", "textAlign": "center"}),
 
             # Texte descriptif
             html.Div([
-                html.H3("Bienvenue dans notre thermomètre d'analyse de l'image de marque sur les réseaux sociaux(Facebook).",
+                html.H3("Bienvenue dans le thermomètre d'analyse de l'image de marque sur les réseaux sociaux(Facebook).",
                        style={"fontSize": "28px", "textAlign": "center"}),
 
                 # html.P("Utilisez le menu au-dessus pour explorer :",
@@ -118,7 +118,7 @@ def render_page(tab):
                 #     html.Li("L’analyse des sentiments par produits", style={"fontSize": "26px"}),
                 #     html.Li("Les posts récents sur les réseaux sociaux", style={"fontSize": "26px"})
                 # ], style={"width": "70%", "margin": "auto"})  # centrer la liste
-            ], style={"marginBottom": "50px"}),
+            ], style={"marginBottom": "50px"}),  
 
             # Nouveau bloc résumé centré
             html.Div([

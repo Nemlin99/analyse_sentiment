@@ -169,7 +169,7 @@ def render_page(tab):
                         html.Div([
                             html.Span("━━━━━", style={"color": SG_WHITE, "opacity": "0.6", "fontSize": "24px"}),
                         ], style={"marginBottom": "20px"}),
-                        html.P("Intelligence d'Analyse de l'Image de Marque", 
+                        html.P("Direction Innovation : Intelligence d'Analyse de l'Image de Marque", 
                               style={
                                   "fontSize": "28px", 
                                   "opacity": "0.95",
@@ -839,11 +839,12 @@ def render_page(tab):
         content = [
             # ===== Hero =====
             html.Div([
+                html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
                 html.H2("📝 Posts Récents", 
-                       style={"fontSize": "42px", "marginBottom": "10px", "fontWeight": "800"}),
-                html.P("Observatoire Libre des Banques - SGCI", 
+                       style={"fontSize": "42px", "marginBottom": "10px"}),
+                html.P("Observatoire Libre des Banques ", 
                       style={"fontSize": "18px", "opacity": "0.9", "fontWeight": "300"})
-            ], style={**card_premium, "textAlign": "center", "padding": "40px"})
+            ], style={**hero_section, "textAlign": "center", "padding": "40px"})
 
         ]
 
@@ -852,7 +853,7 @@ def render_page(tab):
             content.append(
                 html.Div([
                     html.H3(f"📢 {source}", 
-                           style={"color": "#667eea", "fontSize": "28px", "marginBottom": "20px", "fontWeight": "700"})
+                           style={"color": "#c30b0b", "fontSize": "28px", "marginBottom": "20px", "fontWeight": "700"})
                 ], style={"marginTop": "40px"})
             )
 
@@ -869,7 +870,7 @@ def render_page(tab):
                     html.Div([
                         html.Div([
                             html.Span("📅", style={"fontSize": "18px", "marginRight": "6px"}),
-                            html.Span(str(row["date_post"]), style={"fontWeight": "600", "color": "#667eea"})
+                            html.Span(str(row["date_post"]), style={"fontWeight": "600", "color": "#0f0f10"})
                         ], style={"marginBottom": "8px"}),
 
                         html.Div([
@@ -911,7 +912,7 @@ def render_page(tab):
                                     "height": "auto"
                                 },
                                 style_header={
-                                    "backgroundColor": "#667eea",
+                                    "backgroundColor": "#0a0a0c",
                                     "color": "white",
                                     "fontWeight": "bold"
                                 }

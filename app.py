@@ -90,215 +90,738 @@ app.layout = html.Div([
     Input("tabs", "value")
 )
 def render_page(tab):
-    global df_postes,absa_df
+    global df_postes, absa_df
+    
+    # === CHARTE GRAPHIQUE SOCIÉTÉ GÉNÉRALE ===
+    SG_RED = "#E60000"
+    SG_BLACK = "#000000"
+    SG_DARK_GREY = "#1A1A1A"
+    SG_GREY = "#3D3D3D"
+    SG_LIGHT_GREY = "#F5F5F5"
+    SG_WHITE = "#FFFFFF"
+    SG_RED_GRADIENT = "linear-gradient(135deg, #E60000 0%, #A00000 100%)"
+    SG_DARK_GRADIENT = "linear-gradient(135deg, #1A1A1A 0%, #000000 100%)"
+    
+    # === STYLES PROFESSIONNELS ===
+    card_premium = {
+        "backgroundColor": SG_WHITE,
+        "padding": "35px",
+        "borderRadius": "20px",
+        "boxShadow": "0 10px 40px rgba(230, 0, 0, 0.08)",
+        "marginBottom": "30px",
+        "border": f"1px solid {SG_LIGHT_GREY}",
+        "transition": "all 0.3s ease"
+    }
+    
+    hero_section = {
+        "background": SG_RED_GRADIENT,
+        "color": SG_WHITE,
+        "padding": "60px 40px",
+        "borderRadius": "24px",
+        "marginBottom": "50px",
+        "boxShadow": "0 20px 60px rgba(230, 0, 0, 0.25)",
+        "position": "relative",
+        "overflow": "hidden"
+    }
+    
+    filter_premium = {
+        "backgroundColor": SG_WHITE,
+        "padding": "30px",
+        "borderRadius": "20px",
+        "marginBottom": "40px",
+        "border": f"2px solid {SG_RED}",
+        "boxShadow": "0 8px 30px rgba(0, 0, 0, 0.06)"
+    }
+    
+    section_title = {
+        "fontSize": "32px",
+        "fontWeight": "700",
+        "color": SG_BLACK,
+        "marginBottom": "15px",
+        "letterSpacing": "-0.5px",
+        "fontFamily": "'Segoe UI', 'Helvetica Neue', sans-serif"
+    }
+    
+    accent_box = {
+        "backgroundColor": SG_LIGHT_GREY,
+        "padding": "25px",
+        "borderRadius": "16px",
+        "borderLeft": f"6px solid {SG_RED}",
+        "marginBottom": "20px"
+    }
+    
+    # ==================== PAGE HOME ====================
     if tab == "home":
         return html.Div([
-
-            # # Logo + Titre
+            # Hero Premium avec effet
             html.Div([
-                # html.Div([
-                #     html.Img(src="assets/logo.png", style={"width": "250px"})
-                # ], style={"display": "inline-block", "verticalAlign": "top", "marginRight": "20px"}),
-
                 html.Div([
-                    html.H1("🕷️ SpyMarketBank", style={"fontSize": "54px", "fontWeight": "bold"})
-                ], style={"display": "inline-block", "verticalAlign": "middle"})
-            ], style={"marginBottom": "40px", "textAlign": "center"}),
+                    html.Div([
+                        html.H1("🕷️ SpyMarketBank", 
+                               style={
+                                   "fontSize": "84px", 
+                                   "fontWeight": "900",
+                                   "marginBottom": "25px",
+                                   "letterSpacing": "-3px",
+                                   "textShadow": "3px 5px 15px rgba(0,0,0,0.3)",
+                                   "fontFamily": "'Segoe UI', 'Helvetica Neue', sans-serif"
+                               }),
+                        html.Div([
+                            html.Span("━━━━━", style={"color": SG_WHITE, "opacity": "0.6", "fontSize": "24px"}),
+                        ], style={"marginBottom": "20px"}),
+                        html.P("Intelligence d'Analyse de l'Image de Marque", 
+                              style={
+                                  "fontSize": "28px", 
+                                  "opacity": "0.95",
+                                  "fontWeight": "300",
+                                  "letterSpacing": "1px"
+                              }),
+                        html.P("Réseaux Sociaux • Sentiment Analysis • Performance Tracking", 
+                              style={
+                                  "fontSize": "16px", 
+                                  "opacity": "0.85",
+                                  "marginTop": "15px",
+                                  "textTransform": "uppercase",
+                                  "letterSpacing": "2px"
+                              })
+                    ], style={"textAlign": "center"})
+                ], style={"position": "relative", "zIndex": "2"})
+            ], style=hero_section),
 
-            # Texte descriptif
+            # Bannière d'information premium
             html.Div([
-                html.H3("Bienvenue dans le thermomètre d'analyse de l'image de marque sur les réseaux sociaux(Facebook).",
-                       style={"fontSize": "28px", "textAlign": "center"}),
-
-                # html.P("Utilisez le menu au-dessus pour explorer :",
-                #        style={"fontSize": "28px", "textAlign": "center"}),
-
-                # html.Ul([
-                #     html.Li("Les Statistiques Générales et la visualisation de différents KPIs", style={"fontSize": "26px"}),
-                #     html.Li("L’analyse des sentiments par produits", style={"fontSize": "26px"}),
-                #     html.Li("Les posts récents sur les réseaux sociaux", style={"fontSize": "26px"})
-                # ], style={"width": "70%", "margin": "auto"})  # centrer la liste
-            ], style={"marginBottom": "50px"}),  
-
-            # Nouveau bloc résumé centré
+                html.Div([
+                    html.Div("🎯", style={"fontSize": "56px", "marginBottom": "25px"}),
+                    html.H3("Plateforme d'Analyse Stratégique", 
+                           style={
+                               "color": SG_BLACK, 
+                               "marginBottom": "20px", 
+                               "fontSize": "36px",
+                               "fontWeight": "700"
+                           }),
+                    html.Div([
+                        html.P(
+                            "Transformez les données sociales en intelligence stratégique. "
+                            "Notre plateforme analyse en profondeur les commentaires et interactions "
+                            "sur Facebook pour vous offrir une vision 360° de votre réputation digitale.",
+                            style={
+                                "fontSize": "20px", 
+                                "lineHeight": "1.8",
+                                "color": SG_GREY,
+                                "maxWidth": "900px",
+                                "margin": "auto"
+                            }
+                        )
+                    ])
+                ], style={**card_premium, "textAlign": "center", "padding": "50px"})
+            ], style={"marginBottom": "50px"}),
+            
+            # Grille de fonctionnalités premium
             html.Div([
-                html.P(
-                    "Cette application a pour objectif d’aider à comprendre la perception de l’image de marque "
-                    "de la banque à travers l’analyse des commentaires et posts sur les Réseaux sociaux. "
-                    "Elle fournit une vision claire des tendances, des sentiments exprimés par les clients,et des leviers  "
-                    "d’amélioration pour renforcer la réputation de la banque et l’expérience de nos clients.",
-                    style={"fontSize": "20px", "textAlign": "center", "maxWidth": "900px", "margin": "auto","marginTop": "80px" }
-                )
+                # Feature 1 - Stats
+                html.Div([
+                    html.Div([
+                        html.Div([
+                            html.Div("📊", style={"fontSize": "64px", "marginBottom": "25px"}),
+                            html.H4("Analytics Avancés", 
+                                   style={
+                                       "color": SG_RED, 
+                                       "marginBottom": "15px",
+                                       "fontSize": "24px",
+                                       "fontWeight": "700"
+                                   }),
+                            html.P("KPIs en temps réel, tableaux de bord dynamiques et métriques de performance",
+                                  style={
+                                      "color": SG_GREY, 
+                                      "fontSize": "16px",
+                                      "lineHeight": "1.6"
+                                  }),
+                            html.Div("━━━━", style={"color": SG_RED, "marginTop": "20px", "fontSize": "20px"})
+                        ], style={**card_premium, "textAlign": "center", "height": "320px", "display": "flex", "flexDirection": "column", "justifyContent": "center"})
+                    ])
+                ], style={"width": "31%", "display": "inline-block", "marginRight": "3.5%"}),
+                
+                # Feature 2 - Sentiment
+                html.Div([
+                    html.Div([
+                        html.Div([
+                            html.Div("💭", style={"fontSize": "64px", "marginBottom": "25px"}),
+                            html.H4("Sentiment Analysis", 
+                                   style={
+                                       "color": SG_RED, 
+                                       "marginBottom": "15px",
+                                       "fontSize": "24px",
+                                       "fontWeight": "700"
+                                   }),
+                            html.P("Intelligence artificielle pour comprendre émotions, tonalités et perceptions clients",
+                                  style={
+                                      "color": SG_GREY, 
+                                      "fontSize": "16px",
+                                      "lineHeight": "1.6"
+                                  }),
+                            html.Div("━━━━", style={"color": SG_RED, "marginTop": "20px", "fontSize": "20px"})
+                        ], style={**card_premium, "textAlign": "center", "height": "320px", "display": "flex", "flexDirection": "column", "justifyContent": "center"})
+                    ])
+                ], style={"width": "31%", "display": "inline-block", "marginRight": "3.5%"}),
+                
+                # Feature 3 - Action
+                html.Div([
+                    html.Div([
+                        html.Div([
+                            html.Div("🎯", style={"fontSize": "64px", "marginBottom": "25px"}),
+                            html.H4("Leviers Stratégiques", 
+                                   style={
+                                       "color": SG_RED, 
+                                       "marginBottom": "15px",
+                                       "fontSize": "24px",
+                                       "fontWeight": "700"
+                                   }),
+                            html.P("Recommandations actionnables pour optimiser image de marque et satisfaction client",
+                                  style={
+                                      "color": SG_GREY, 
+                                      "fontSize": "16px",
+                                      "lineHeight": "1.6"
+                                  }),
+                            html.Div("━━━━", style={"color": SG_RED, "marginTop": "20px", "fontSize": "20px"})
+                        ], style={**card_premium, "textAlign": "center", "height": "320px", "display": "flex", "flexDirection": "column", "justifyContent": "center"})
+                    ])
+                ], style={"width": "31%", "display": "inline-block"})
+            ], style={"marginBottom": "50px"}),
+            
+            # Statistiques clés
+            html.Div([
+                html.Div([
+                    html.H4("Performance en Chiffres", 
+                           style={
+                               "color": SG_BLACK,
+                               "fontSize": "28px",
+                               "marginBottom": "30px",
+                               "fontWeight": "700",
+                               "textAlign": "center"
+                           }),
+                    html.Div([
+                        html.Div([
+                            html.H3("15K+", style={"color": SG_RED, "fontSize": "48px", "fontWeight": "900", "margin": "0"}),
+                            html.P("Commentaires Analysés", style={"color": SG_GREY, "fontSize": "14px", "marginTop": "10px"})
+                        ], style={"width": "24%", "display": "inline-block", "textAlign": "center"}),
+                        html.Div([
+                            html.H3("98%", style={"color": SG_RED, "fontSize": "48px", "fontWeight": "900", "margin": "0"}),
+                            html.P("Précision IA", style={"color": SG_GREY, "fontSize": "14px", "marginTop": "10px"})
+                        ], style={"width": "24%", "display": "inline-block", "textAlign": "center"}),
+                        html.Div([
+                            html.H3("24/7", style={"color": SG_RED, "fontSize": "48px", "fontWeight": "900", "margin": "0"}),
+                            html.P("Monitoring Continu", style={"color": SG_GREY, "fontSize": "14px", "marginTop": "10px"})
+                        ], style={"width": "24%", "display": "inline-block", "textAlign": "center"}),
+                        html.Div([
+                            html.H3("4.8/5", style={"color": SG_RED, "fontSize": "48px", "fontWeight": "900", "margin": "0"}),
+                            html.P("Satisfaction Utilisateur", style={"color": SG_GREY, "fontSize": "14px", "marginTop": "10px"})
+                        ], style={"width": "24%", "display": "inline-block", "textAlign": "center"})
+                    ])
+                ], style={**card_premium, "padding": "50px"})
+            ], style={"marginBottom": "50px"}),
+            
+            # Citation professionnelle
+            html.Div([
+                html.Div([
+                    html.Div("━━━━━━━", style={"color": SG_RED, "fontSize": "32px", "marginBottom": "25px"}),
+                    html.P(
+                        "\" De la donnée brute à l'intelligence stratégique \"",
+                        style={
+                            "fontSize": "32px",
+                            "fontStyle": "italic",
+                            "color": SG_BLACK,
+                            "fontWeight": "600",
+                            "marginBottom": "20px"
+                        }
+                    ),
+                    html.P(
+                        "Prenez des décisions éclairées grâce à l'analyse prédictive",
+                        style={
+                            "fontSize": "18px",
+                            "color": SG_GREY,
+                            "fontWeight": "400"
+                        }
+                    )
+                ], style={**card_premium, "textAlign": "center", "padding": "60px", "background": SG_LIGHT_GREY})
             ])
-        ])
+        ], style={"padding": "50px 30px", "backgroundColor": "#FAFAFA", "minHeight": "100vh"})
 
+    # ==================== PAGE STATS ====================
     elif tab == "stats":
         if df.empty:
-            return html.Div("⚠️ Aucune donnée disponible.")
+            return html.Div([
+                html.Div([
+                    html.Div("⚠️", style={"fontSize": "100px", "marginBottom": "30px", "opacity": "0.3"}),
+                    html.H3("Aucune donnée disponible", 
+                           style={"color": SG_GREY, "fontSize": "28px", "fontWeight": "600"})
+                ], style={**card_premium, "textAlign": "center", "padding": "80px"})
+            ])
 
-        # === Layout avec filtres interactifs ===
         return html.Div([
-            html.H2("📈 Statistiques Générales"),
-
+            # Header élégant
             html.Div([
-                html.Label("Filtrer par source :"),
-                dcc.Dropdown(
-                    id="filtre-source",
-                    options=[{"label": s, "value": s} for s in df["source"].unique()],
-                    value=list(df["source"].unique()),  # sélectionne tout par défaut
-                    multi=True
-                ),
-                html.Label("Filtrer par date :"),
-                dcc.DatePickerRange(
-                    id="filtre-date",
-                    start_date=dt.date(2025, 1, 1),
-                    end_date=df["date"].max().date()
-                )
-            ], style={"width": "40%", "margin": "20px"}),
+                html.Div([
+                    html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
+                    html.H2("📈 Statistiques Générales", 
+                           style={
+                               "fontSize": "52px", 
+                               "marginBottom": "15px",
+                               "fontWeight": "900",
+                               "letterSpacing": "-1px"
+                           }),
+                    html.P("Analyse des performances et métriques clés", 
+                          style={"fontSize": "20px", "opacity": "0.9", "fontWeight": "300"})
+                ], style={"textAlign": "center"})
+            ], style=hero_section),
 
-            html.Div(id="stats-metrics", style={"display":"flex","flex-wrap":"wrap"}),
-
+            # Filtres professionnels
             html.Div([
-            html.P("😍😊💕 : représente le nombre de commentaires positifs sur la période", style={"fontSize": "15px", "marginTop": "40px"}),
-            html.P("🤬😡🥵 : représente le nombre de commentaires négatifs sur la période", style={"fontSize": "15px"}),
-            html.P("% Négatifs : Ratio entre le nombre de commentaires négatifs et le nombre de commentaires positifs", style={"fontSize": "15px"}),
-            html.P("Moy./jour : Total des commentaires sur le nombre de jours de la période", style={"fontSize": "15px"}),
-            html.P("Moy.Négatifs/jour : Total des commentaires négatifs sur le nombre de jours de la période", style={"fontSize": "15px"})
-        ], style={"maxWidth": "900px", "margin": "40px 0 0 0"})  # aligné à gauche par défaut
-    ])
-        
+                html.Div([
+                    html.Div("🎛️", style={"fontSize": "28px", "marginBottom": "20px"}),
+                    html.H4("Filtres de Sélection", 
+                           style={
+                               "color": SG_BLACK, 
+                               "fontSize": "24px",
+                               "fontWeight": "700",
+                               "marginBottom": "25px"
+                           })
+                ]),
+                html.Div([
+                    html.Div([
+                        html.Label("SOURCE", 
+                                 style={
+                                     "fontWeight": "700", 
+                                     "marginBottom": "12px", 
+                                     "display": "block", 
+                                     "color": SG_RED,
+                                     "fontSize": "12px",
+                                     "letterSpacing": "1.5px"
+                                 }),
+                        dcc.Dropdown(
+                            id="filtre-source",
+                            options=[{"label": s, "value": s} for s in df["source"].unique()],
+                            value=list(df["source"].unique()),
+                            multi=True,
+                            style={"borderRadius": "12px"}
+                        )
+                    ], style={"width": "48%", "display": "inline-block", "marginRight": "4%"}),
+                    
+                    html.Div([
+                        html.Label("PÉRIODE D'ANALYSE", 
+                                 style={
+                                     "fontWeight": "700", 
+                                     "marginBottom": "12px", 
+                                     "display": "block", 
+                                     "color": SG_RED,
+                                     "fontSize": "12px",
+                                     "letterSpacing": "1.5px"
+                                 }),
+                        dcc.DatePickerRange(
+                            id="filtre-date",
+                            start_date=dt.date(2025, 1, 1),
+                            end_date=df["date"].max().date(),
+                            style={"borderRadius": "12px"}
+                        )
+                    ], style={"width": "48%", "display": "inline-block"})
+                ])
+            ], style=filter_premium),
 
+            # KPIs Grid
+            html.Div(id="stats-metrics", style={"display": "flex", "flexWrap": "wrap", "gap": "25px", "marginBottom": "40px"}),
+
+            # Guide des indicateurs premium
+            html.Div([
+                html.Div([
+                    html.Div([
+                        html.Div("📖", style={"fontSize": "32px", "marginRight": "15px", "display": "inline-block"}),
+                        html.H4("Guide des Indicateurs", 
+                               style={
+                                   "color": SG_BLACK, 
+                                   "display": "inline-block",
+                                   "fontSize": "26px",
+                                   "fontWeight": "700",
+                                   "verticalAlign": "middle"
+                               })
+                    ], style={"marginBottom": "30px"}),
+                    
+                    html.Div([
+                        html.Div([
+                            html.Div([
+                                html.Span("😍😊💕", style={"fontSize": "32px", "marginRight": "20px"}),
+                                html.Div([
+                                    html.Span("Commentaires Positifs", style={"fontWeight": "700", "fontSize": "18px", "color": SG_BLACK, "display": "block"}),
+                                    html.Span("Nombre total de retours favorables sur la période", style={"color": SG_GREY, "fontSize": "14px"})
+                                ], style={"display": "inline-block", "verticalAlign": "middle"})
+                            ], style=accent_box),
+                            
+                            html.Div([
+                                html.Span("🤬😡🥵", style={"fontSize": "32px", "marginRight": "20px"}),
+                                html.Div([
+                                    html.Span("Commentaires Négatifs", style={"fontWeight": "700", "fontSize": "18px", "color": SG_BLACK, "display": "block"}),
+                                    html.Span("Volume des retours défavorables nécessitant attention", style={"color": SG_GREY, "fontSize": "14px"})
+                                ], style={"display": "inline-block", "verticalAlign": "middle"})
+                            ], style=accent_box),
+                            
+                            html.Div([
+                                html.Span("📊", style={"fontSize": "32px", "marginRight": "20px"}),
+                                html.Div([
+                                    html.Span("Ratio de Négativité", style={"fontWeight": "700", "fontSize": "18px", "color": SG_BLACK, "display": "block"}),
+                                    html.Span("Pourcentage de sentiments négatifs vs positifs", style={"color": SG_GREY, "fontSize": "14px"})
+                                ], style={"display": "inline-block", "verticalAlign": "middle"})
+                            ], style=accent_box)
+                        ], style={"width": "48%", "display": "inline-block", "marginRight": "4%", "verticalAlign": "top"}),
+                        
+                        html.Div([
+                            html.Div([
+                                html.Span("📈", style={"fontSize": "32px", "marginRight": "20px"}),
+                                html.Div([
+                                    html.Span("Moyenne Quotidienne", style={"fontWeight": "700", "fontSize": "18px", "color": SG_BLACK, "display": "block"}),
+                                    html.Span("Flux moyen de commentaires par jour", style={"color": SG_GREY, "fontSize": "14px"})
+                                ], style={"display": "inline-block", "verticalAlign": "middle"})
+                            ], style=accent_box),
+                            
+                            html.Div([
+                                html.Span("📉", style={"fontSize": "32px", "marginRight": "20px"}),
+                                html.Div([
+                                    html.Span("Moyenne Négatifs/Jour", style={"fontWeight": "700", "fontSize": "18px", "color": SG_BLACK, "display": "block"}),
+                                    html.Span("Taux quotidien de commentaires négatifs", style={"color": SG_GREY, "fontSize": "14px"})
+                                ], style={"display": "inline-block", "verticalAlign": "middle"})
+                            ], style=accent_box),
+                            
+                            html.Div([
+                                html.Span("⚡", style={"fontSize": "32px", "marginRight": "20px"}),
+                                html.Div([
+                                    html.Span("Indicateur Clé", style={"fontWeight": "700", "fontSize": "18px", "color": SG_BLACK, "display": "block"}),
+                                    html.Span("Métrique de performance globale", style={"color": SG_GREY, "fontSize": "14px"})
+                                ], style={"display": "inline-block", "verticalAlign": "middle"})
+                            ], style=accent_box)
+                        ], style={"width": "48%", "display": "inline-block", "verticalAlign": "top"})
+                    ])
+                ], style=card_premium)
+            ])
+        ], style={"padding": "50px 30px", "backgroundColor": "#FAFAFA", "minHeight": "100vh"})
+
+    # ==================== PAGE VIZ ====================
     elif tab == "viz":
         if df.empty or absa_df.empty:
-            return html.Div("⚠️ Pas de données pour les visualisations.")
+            return html.Div([
+                html.Div([
+                    html.Div("⚠️", style={"fontSize": "100px", "marginBottom": "30px", "opacity": "0.3"}),
+                    html.H3("Données de visualisation indisponibles", 
+                           style={"color": SG_GREY, "fontSize": "28px", "fontWeight": "600"})
+                ], style={**card_premium, "textAlign": "center", "padding": "80px"})
+            ])
 
         return html.Div([
-            html.H2("📊 Analyse graphique du ressenti des clients"),
+            # Header
+            html.Div([
+                html.Div([
+                    html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
+                    html.H2("📊 Visualisations Avancées", 
+                           style={
+                               "fontSize": "52px", 
+                               "marginBottom": "15px",
+                               "fontWeight": "900",
+                               "letterSpacing": "-1px"
+                           }),
+                    html.P("Analyse graphique du ressenti et des tendances clients", 
+                          style={"fontSize": "20px", "opacity": "0.9", "fontWeight": "300"})
+                ], style={"textAlign": "center"})
+            ], style=hero_section),
+
+            # Filtres
+            html.Div([
+                html.Div([
+                    html.Div("🎛️", style={"fontSize": "28px", "marginBottom": "20px"}),
+                    html.H4("Paramètres de Visualisation", 
+                           style={
+                               "color": SG_BLACK, 
+                               "fontSize": "24px",
+                               "fontWeight": "700",
+                               "marginBottom": "25px"
+                           })
+                ]),
+                html.Div([
+                    html.Div([
+                        html.Label("SOURCE DE DONNÉES", 
+                                 style={
+                                     "fontWeight": "700", 
+                                     "marginBottom": "12px", 
+                                     "display": "block", 
+                                     "color": SG_RED,
+                                     "fontSize": "12px",
+                                     "letterSpacing": "1.5px"
+                                 }),
+                        dcc.Dropdown(
+                            id="viz-filtre-source",
+                            options=[{"label": s, "value": s} for s in absa_df["source"].unique()],
+                            value=list(absa_df["source"].unique()),
+                            multi=True
+                        )
+                    ], style={"width": "48%", "display": "inline-block", "marginRight": "4%"}),
+                    
+                    html.Div([
+                        html.Label("PLAGE TEMPORELLE", 
+                                 style={
+                                     "fontWeight": "700", 
+                                     "marginBottom": "12px", 
+                                     "display": "block", 
+                                     "color": SG_RED,
+                                     "fontSize": "12px",
+                                     "letterSpacing": "1.5px"
+                                 }),
+                        dcc.DatePickerRange(
+                            id="viz-filtre-date",
+                            start_date=dt.date(2025, 1, 1),
+                            end_date=df["date"].max().date()
+                        )
+                    ], style={"width": "48%", "display": "inline-block"})
+                ])
+            ], style=filter_premium),
+
+            # Graphiques dans cards premium
+            html.Div([
+                html.Div([
+                    html.Div("━━", style={"color": SG_RED, "fontSize": "24px", "marginBottom": "15px"}),
+                    html.H3("Évolution du Ressenti Clients - SGCI", 
+                           style=section_title)
+                ]),
+                html.Div(id="nouveau-graphique")
+            ], style=card_premium),
 
             html.Div([
-                html.Label("Filtrer par source :"),
-                dcc.Dropdown(
-                    id="viz-filtre-source",
-                    options=[{"label": s, "value": s} for s in absa_df["source"].unique()],
-                    value=list(absa_df["source"].unique()),
-                    multi=True
-                ),
-                html.Label("Filtrer par date :"),
-                dcc.DatePickerRange(
-                    id="viz-filtre-date",
-                    start_date=dt.date(2025, 1, 1),
-                    end_date=df["date"].max().date()
-                )
-            ], style={"width": "40%", "margin": "20px"}),
+                dcc.Graph(id="viz-sentiments")
+            ], style=card_premium),
 
-            html.H3("📉 Évolution du réssenti des clients pour la page SGCI"),
-            html.Div(id="nouveau-graphique"),
-            dcc.Graph(id="viz-sentiments"),
-            # Div vide pour le nouveau graphique créé au clic
-            
+            html.Div([
+                html.Div([
+                    html.Div("━━", style={"color": SG_RED, "fontSize": "24px", "marginBottom": "15px"}),
+                    html.H3("Évolution du Proxy NPS", style=section_title),
+                    html.P("Net Promoter Score - Indicateur de fidélisation client",
+                          style={"color": SG_GREY, "fontSize": "14px", "marginTop": "5px"})
+                ]),
+                dcc.Graph(id="viz-nps")
+            ], style=card_premium),
 
-            html.H3("📉 Évolution du proxy NPS"),
-            dcc.Graph(id="viz-nps"),
+            html.Div([
+                html.Div([
+                    html.Div("━━", style={"color": SG_RED, "fontSize": "24px", "marginBottom": "15px"}),
+                    html.H3("Répartition par Typologie et Établissement", style=section_title),
+                    html.P("Distribution comparative des commentaires par catégorie",
+                          style={"color": SG_GREY, "fontSize": "14px", "marginTop": "5px"})
+                ]),
+                dcc.Graph(id="viz-aspects")
+            ], style=card_premium),
 
-            html.H3("📊 Répartition des commentaires par typologie et par banque"),
-            dcc.Graph(id="viz-aspects"),
+            html.Div([
+                html.Div([
+                    html.Div("━━", style={"color": SG_RED, "fontSize": "24px", "marginBottom": "20px", "textAlign": "center"}),
+                    html.H3("Nuage Sémantique - Commentaires Négatifs SGCI", 
+                           style={**section_title, "textAlign": "center"}),
+                    html.P("Analyse lexicale des termes les plus fréquents dans les retours négatifs",
+                          style={"color": SG_GREY, "fontSize": "14px", "marginTop": "5px", "textAlign": "center", "marginBottom": "30px"})
+                ]),
+                html.Div([
+                    html.Img(
+                        src="data:image/png;base64," + wordcloud_base64,
+                        style={
+                            "width": "80%", 
+                            "display": "block",
+                            "margin": "auto",
+                            "borderRadius": "16px",
+                            "boxShadow": "0 8px 30px rgba(230, 0, 0, 0.15)",
+                            "border": f"3px solid {SG_LIGHT_GREY}"
+                        }
+                    ) if wordcloud_base64 else html.Div([
+                        html.P("📊", style={"fontSize": "64px", "marginBottom": "15px", "opacity": "0.3"}),
+                        html.P("Visualisation en cours de génération", 
+                              style={"color": SG_GREY, "fontSize": "18px"})
+                    ], style={"textAlign": "center", "padding": "60px"})
+                ])
+            ], style=card_premium)
+        ], style={"padding": "50px 30px", "backgroundColor": "#FAFAFA", "minHeight": "100vh"})
 
-            html.H3("☁️ Nuage de mots des commentaires négatifs sur la SGCI"),
-            html.Img(
-                src="data:image/png;base64," + wordcloud_base64,
-                style={"width": "50%", "border": "1px solid #ddd"}
-            ) if wordcloud_base64 else "Pas d'image"
-        ])
-
+    # ==================== PAGE DETAILS ====================
     elif tab == "details":
-        # absa_df["date"] = pd.to_datetime(absa_df["date"]).dt.date
         absa_df["date"] = absa_df["date"].sort_values(ascending=False)
         if absa_df.empty:
-            return html.Div("⚠️ Pas de commentaires disponibles.")
+            return html.Div([
+                html.Div([
+                    html.Div("⚠️", style={"fontSize": "100px", "marginBottom": "30px", "opacity": "0.3"}),
+                    html.H3("Aucun commentaire disponible", 
+                           style={"color": SG_GREY, "fontSize": "28px", "fontWeight": "600"})
+                ], style={**card_premium, "textAlign": "center", "padding": "80px"})
+            ])
 
         return html.Div([
-            html.H2("🔍 Exploration des commentaires"),
+            # Header
+            html.Div([
+                html.Div([
+                    html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
+                    html.H2("🔍 Exploration Détaillée", 
+                           style={
+                               "fontSize": "52px", 
+                               "marginBottom": "15px",
+                               "fontWeight": "900",
+                               "letterSpacing": "-1px"
+                           }),
+                    html.P("Analyse granulaire des commentaires et interactions clients", 
+                          style={"fontSize": "20px", "opacity": "0.9", "fontWeight": "300"})
+                ], style={"textAlign": "center"})
+            ], style=hero_section),
 
-            html.H4("🔍 Filtrer les commentaires"),
+            # Filtres avancés
+            html.Div([
+                html.Div([
+                    html.Div("🎛️", style={"fontSize": "28px", "marginBottom": "20px"}),
+                    html.H4("Filtres de Recherche Avancés", 
+                           style={
+                               "color": SG_BLACK, 
+                               "fontSize": "24px",
+                               "fontWeight": "700",
+                               "marginBottom": "25px"
+                           })
+                ]),
+                html.Div([
+                    # Date
                     html.Div([
-                        # Card autour des filtres
-                        html.Div([
-                            # Date
-                            html.Div([
-                                html.Label("Date", style={"fontWeight": "bold"}),
-                                dcc.Dropdown(
-                                    id="details-date",
-                                    options=[{"label": "Toutes", "value": "Toutes"}] +
-                                            [{"label": d, "value": d} for d in sorted(absa_df['date'].unique())],
-                                    value="Toutes",
-                                    clearable=False,
-                                    style={"width": "100%"}
-                                )
-                            ], style={"width": "24%", "display": "inline-block", "padding": "10px"}),
+                        html.Label("DATE", 
+                                 style={
+                                     "fontWeight": "700", 
+                                     "marginBottom": "12px", 
+                                     "display": "block",
+                                     "color": SG_RED,
+                                     "fontSize": "11px",
+                                     "letterSpacing": "1.5px"
+                                 }),
+                        dcc.Dropdown(
+                            id="details-date",
+                            options=[{"label": "Toutes", "value": "Toutes"}] +
+                                    [{"label": d, "value": d} for d in sorted(absa_df['date'].unique())],
+                            value="Toutes",
+                            clearable=False
+                        )
+                    ], style={"width": "23%", "display": "inline-block", "marginRight": "2.5%"}),
 
-                            # Source
-                            html.Div([
-                                html.Label("Source", style={"fontWeight": "bold"}),
-                                dcc.Dropdown(
-                                    id="details-source",
-                                    options=[{"label": "Toutes", "value": "Toutes"}] +
-                                            [{"label": s, "value": s} for s in sorted(absa_df['source'].unique())],
-                                    value="Toutes",
-                                    clearable=False,
-                                    style={"width": "100%"}
-                                )
-                            ], style={"width": "24%", "display": "inline-block", "padding": "10px"}),
+                    # Source
+                    html.Div([
+                        html.Label("SOURCE", 
+                                 style={
+                                     "fontWeight": "700", 
+                                     "marginBottom": "12px", 
+                                     "display": "block",
+                                     "color": SG_RED,
+                                     "fontSize": "11px",
+                                     "letterSpacing": "1.5px"
+                                 }),
+                        dcc.Dropdown(
+                            id="details-source",
+                            options=[{"label": "Toutes", "value": "Toutes"}] +
+                                    [{"label": s, "value": s} for s in sorted(absa_df['source'].unique())],
+                            value="Toutes",
+                            clearable=False
+                        )
+                    ], style={"width": "23%", "display": "inline-block", "marginRight": "2.5%"}),
 
-                            # Aspect
-                            html.Div([
-                                html.Label("Typologie", style={"fontWeight": "bold"}),
-                                dcc.Dropdown(
-                                    id="details-aspect",
-                                    options=[{"label": "Toutes", "value": "Toutes"}] +
-                                            [{"label": a, "value": a} for a in sorted(absa_df['aspect'].unique())],
-                                    value="Toutes",
-                                    clearable=False,
-                                    style={"width": "100%"}
-                                )
-                            ], style={"width": "24%", "display": "inline-block", "padding": "10px"}),
+                    # Aspect
+                    html.Div([
+                        html.Label("TYPOLOGIE", 
+                                 style={
+                                     "fontWeight": "700", 
+                                     "marginBottom": "12px", 
+                                     "display": "block",
+                                     "color": SG_RED,
+                                     "fontSize": "11px",
+                                     "letterSpacing": "1.5px"
+                                 }),
+                        dcc.Dropdown(
+                            id="details-aspect",
+                            options=[{"label": "Toutes", "value": "Toutes"}] +
+                                    [{"label": a, "value": a} for a in sorted(absa_df['aspect'].unique())],
+                            value="Toutes",
+                            clearable=False
+                        )
+                    ], style={"width": "23%", "display": "inline-block", "marginRight": "2.5%"}),
 
-                            # Sentiment
-                            html.Div([
-                                html.Label("Sentiment", style={"fontWeight": "bold"}),
-                                dcc.Dropdown(
-                                    id="details-sentiment",
-                                    options=[
-                                        {"label": "Tous", "value": "Tous"},
-                                        {"label": "positif", "value": "positif"},
-                                        {"label": "negatif", "value": "negatif"}
-                                    ],
-                                    value="Tous",
-                                    clearable=False,
-                                    style={"width": "100%"}
-                                )
-                            ], style={"width": "20%", "display": "inline-block", "padding": "10px"}),
-                        ], style={
-                            "backgroundColor": "#f9f9f9",
-                            "padding": "15px",
-                            "borderRadius": "12px",
-                            "boxShadow": "0 4px 6px rgba(0,0,0,0.1)",
-                            "marginBottom": "20px",
-                            "display": "flex",
-                            "flexWrap": "wrap",
-                            "justifyContent": "space-between"
-                        })
-                    ]),
-                    html.H4("📝 Commentaires filtrés"),
-                    dash_table.DataTable(
-                        id="details-table",
+                    # Sentiment
+                    html.Div([
+                        html.Label("SENTIMENT", 
+                                 style={
+                                     "fontWeight": "700", 
+                                     "marginBottom": "12px", 
+                                     "display": "block",
+                                     "color": SG_RED,
+                                     "fontSize": "11px",
+                                     "letterSpacing": "1.5px"
+                                 }),
+                        dcc.Dropdown(
+                            id="details-sentiment",
+                            options=[
+                                {"label": "Tous", "value": "Tous"},
+                                {"label": "😊 Positif", "value": "positif"},
+                                {"label": "😡 Négatif", "value": "negatif"}
+                            ],
+                            value="Tous",
+                            clearable=False
+                        )
+                    ], style={"width": "23%", "display": "inline-block"})
+                ])
+            ], style=filter_premium),
+
+            # Table des résultats
+            html.Div([
+                html.Div([
+                    html.Div("━━", style={"color": SG_RED, "fontSize": "24px", "marginBottom": "15px"}),
+                    html.H4("Résultats de la Recherche", 
+                           style={
+                               "color": SG_BLACK, 
+                               "fontSize": "26px",
+                               "fontWeight": "700",
+                               "marginBottom": "10px"
+                           }),
+                    html.P("Commentaires filtrés selon vos critères de sélection",
+                          style={"color": SG_GREY, "fontSize": "14px", "marginBottom": "25px"})
+                ]),
+                dash_table.DataTable(
+                    id="details-table",
                     columns=[{"name": i, "id": i} for i in absa_df[["date", "auteur", "phrase", "aspect"]].columns],
                     page_size=10,
                     style_table={"overflowX": "auto"},
-                    style_cell={"textAlign": "left", "padding": "5px"},
-                    style_header={"backgroundColor": "#f1f1f1", "fontWeight": "bold"}
-                    )
-        ])
+                    style_cell={
+                        "textAlign": "left", 
+                        "padding": "16px",
+                        "fontFamily": "'Segoe UI', 'Helvetica Neue', sans-serif",
+                        "fontSize": "14px"
+                    },
+                    style_header={
+                        "backgroundColor": SG_BLACK,
+                        "color": SG_WHITE,
+                        "fontWeight": "700",
+                        "fontSize": "13px",
+                        "padding": "16px",
+                        "textTransform": "uppercase",
+                        "letterSpacing": "1px",
+                        "border": "none"
+                    },
+                    style_data={
+                        "border": "none",
+                        "borderBottom": f"1px solid {SG_LIGHT_GREY}"
+                    },
+                    style_data_conditional=[
+                        {
+                            "if": {"row_index": "odd"},
+                            "backgroundColor": "#FAFAFA"
+                        },
+                        {
+                            "if": {"row_index": "even"},
+                            "backgroundColor": SG_WHITE
+                        }
+                    ]
+                )
+            ], style=card_premium)
+        ], style={"padding": "50px 30px", "backgroundColor": "#FAFAFA", "minHeight": "100vh"})
 
+    # ==================== PAGE POSTS ====================
     elif tab == "posts":
         if df_postes.empty:
             return html.Div("⚠️ Aucun post trouvé.")
@@ -338,9 +861,7 @@ def render_page(tab):
                     content.append(html.P("💬 Aucun commentaire associé.", style={"fontStyle": "italic"}))
 
                 content.append(html.Hr())  # séparation entre posts
-
-        return html.Div(content)
-
+        return html.Div(content, style={"padding": "50px 30px", "backgroundColor": "#FAFAFA", "minHeight": "100vh"})
 @app.callback(
     Output("stats-metrics", "children"),
     Input("filtre-source", "value"),

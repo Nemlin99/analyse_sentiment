@@ -301,7 +301,7 @@ def render_page(tab):
                            }),
                     html.Div([
                         html.Div([
-                            html.H3("15K+", style={"color": SG_RED, "fontSize": "48px", "fontWeight": "900", "margin": "0"}),
+                            html.H3("10K+", style={"color": SG_RED, "fontSize": "48px", "fontWeight": "900", "margin": "0"}),
                             html.P("Commentaires Analysés", style={"color": SG_GREY, "fontSize": "14px", "marginTop": "10px"})
                         ], style={"width": "24%", "display": "inline-block", "textAlign": "center"}),
                         html.Div([
@@ -824,44 +824,110 @@ def render_page(tab):
     # ==================== PAGE POSTS ====================
     elif tab == "posts":
         if df_postes.empty:
-            return html.Div("⚠️ Aucun post trouvé.")
+            return html.Div([
+                html.Div([
+                    html.Div("⚠️", style={"fontSize": "80px", "marginBottom": "20px", "opacity": "0.5"}),
+                    html.H3("Aucun post trouvé", style={"color": "#6b7280", "fontWeight": "600"})
+                ], style={**card_premium, "textAlign": "center", "padding": "60px"})
+            ])
 
-        # Préparer les dates
-        df_postes['date_post'] = pd.to_datetime(df_postes['date_post'], errors='coerce').dt.date
-        df_postes = df_postes.dropna(subset=['date_post'])
+        # Nettoyage des dates
+        df_postes["date_post"] = pd.to_datetime(df_postes["date_post"], errors="coerce").dt.date
+        df_postes = df_postes.dropna(subset=["date_post"])
 
-        content = [html.H2("📝 Posts récents sur la SGCI dans le groupe Observatoire Libre des Banques")]
+        # Contenu principal
+        content = [
+            # ===== Hero =====
+            html.Div([
+                html.H2("📝 Posts Récents", 
+                       style={"fontSize": "42px", "marginBottom": "10px", "fontWeight": "800"}),
+                html.P("Observatoire Libre des Banques - SGCI", 
+                      style={"fontSize": "18px", "opacity": "0.9", "fontWeight": "300"})
+            ], style={**card_premium, "textAlign": "center", "padding": "40px"})
 
-        for source in df_postes['source'].unique():
-            content.append(html.H3(f"📢 {source}"))
+        ]
 
-            posts = df_postes[df_postes['source'] == source].groupby('poste').first().reset_index()
-            posts = posts.sort_values(by='date_post', ascending=False)
+        # ===== Posts par Source =====
+        for source in df_postes["source"].unique():
+            content.append(
+                html.Div([
+                    html.H3(f"📢 {source}", 
+                           style={"color": "#667eea", "fontSize": "28px", "marginBottom": "20px", "fontWeight": "700"})
+                ], style={"marginTop": "40px"})
+            )
+
+            # Posts uniques pour chaque source
+            posts = df_postes[df_postes["source"] == source].groupby("poste").first().reset_index()
+            posts = posts.sort_values(by="date_post", ascending=False)
 
             for _, row in posts.iterrows():
-                content.append(
+                # Posts individuels
+                coms = df_postes[(df_postes["source"] == source) & (df_postes["poste"] == row["poste"])]
+
+                post_card = html.Div([
+                    # Header
                     html.Div([
-                        html.P(f"**{row['date_post']} - Auteur: {row['auteur']} 📝 Post :** {row['poste']}", style={"fontWeight": "bold"}),
-                    ], style={"marginBottom": "5px"})
-                )
+                        html.Div([
+                            html.Span("📅", style={"fontSize": "18px", "marginRight": "6px"}),
+                            html.Span(str(row["date_post"]), style={"fontWeight": "600", "color": "#667eea"})
+                        ], style={"marginBottom": "8px"}),
 
-                coms = df_postes[(df_postes['source'] == source) & (df_postes['poste'] == row['poste'])]
-                if not coms.empty:
-                    content.append(html.P("💬 Commentaires associés :"))
-                    content.append(
-                        dash_table.DataTable(
-                            data=coms[['date','auteur_com', 'commentaire']].to_dict("records"),
-                            columns=[{"name": i, "id": i} for i in ['date','auteur_com', 'commentaire']],
-                            page_size=5,
-                            style_table={"overflowX": "auto"},
-                            style_cell={"textAlign": "left", "padding": "5px"},
-                        )
-                    )
-                else:
-                    content.append(html.P("💬 Aucun commentaire associé.", style={"fontStyle": "italic"}))
+                        html.Div([
+                            html.Span("👤", style={"fontSize": "18px", "marginRight": "6px"}),
+                            html.Span(row["auteur"], style={"fontWeight": "600", "color": "#374151"})
+                        ], style={"marginBottom": "12px"}),
 
-                content.append(html.Hr())  # séparation entre posts
+                        # Contenu du post
+                        html.P(row["poste"], 
+                              style={
+                                  "fontSize": "16px", 
+                                  "lineHeight": "1.6",
+                                  "color": "#1f2937",
+                                  "padding": "15px",
+                                  "backgroundColor": "#f9fafb",
+                                  "borderRadius": "8px",
+                                  "borderLeft": "4px solid #667eea"
+                              })
+                    ]),
+
+                    # Commentaires liés
+                    html.Div([
+                        # coms := df_postes[(df_postes["source"] == source) & (df_postes["poste"] == row["poste"])],
+                        html.Div([
+                            html.H5("💬 Commentaires", 
+                                   style={"color": "#374151", "marginTop": "20px", "marginBottom": "15px", "fontWeight": "700"}),
+
+                            dash_table.DataTable(
+                                data=coms[["date", "auteur_com", "commentaire"]].to_dict("records"),
+                                columns=[{"name": i, "id": i} for i in ["date", "auteur_com", "commentaire"]],
+                                page_size=5,
+                                style_table={"overflowX": "auto"},
+                                style_cell={
+                                    "textAlign": "left", 
+                                    "padding": "10px",
+                                    "fontFamily": "Arial, sans-serif",
+                                    "fontSize": "14px",
+                                    "whiteSpace": "normal",
+                                    "height": "auto"
+                                },
+                                style_header={
+                                    "backgroundColor": "#667eea",
+                                    "color": "white",
+                                    "fontWeight": "bold"
+                                }
+                            ) if not coms.empty else html.P(
+                                "Aucun commentaire associé", 
+                                style={"fontStyle": "italic", "color": "#9ca3af", "marginTop": "5px"}
+                            )
+                        ])
+                    ])
+                ], style=card_premium)
+
+                content.append(post_card)
+
+ # séparation entre posts
         return html.Div(content, style={"padding": "50px 30px", "backgroundColor": "#FAFAFA", "minHeight": "100vh"})
+    
 @app.callback(
     Output("stats-metrics", "children"),
     Input("filtre-source", "value"),

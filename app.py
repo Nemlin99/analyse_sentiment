@@ -169,14 +169,14 @@ def render_page(tab):
                         html.Div([
                             html.Span("━━━━━", style={"color": SG_WHITE, "opacity": "0.6", "fontSize": "24px"}),
                         ], style={"marginBottom": "20px"}),
-                        html.P("Direction Innovation : Intelligence d'Analyse de l'Image de Marque", 
+                        html.P("Intelligence d'Analyse de l'Image de Marque", 
                               style={
                                   "fontSize": "28px", 
                                   "opacity": "0.95",
                                   "fontWeight": "300",
                                   "letterSpacing": "1px"
                               }),
-                        html.P("Réseaux Sociaux • Sentiment Analysis • Performance Tracking", 
+                        html.P("Réseaux Sociaux • Analyse de sentiments • Performance Tracking", 
                               style={
                                   "fontSize": "16px", 
                                   "opacity": "0.85",
@@ -246,7 +246,7 @@ def render_page(tab):
                     html.Div([
                         html.Div([
                             html.Div("💭", style={"fontSize": "64px", "marginBottom": "25px"}),
-                            html.H4("Sentiment Analysis", 
+                            html.H4("Analyse de sentiments ", 
                                    style={
                                        "color": SG_RED, 
                                        "marginBottom": "15px",
@@ -361,7 +361,7 @@ def render_page(tab):
             # Header élégant
             html.Div([
                 html.Div([
-                    html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
+                    
                     html.H2("📈 Statistiques Générales", 
                            style={
                                "fontSize": "52px", 
@@ -369,6 +369,7 @@ def render_page(tab):
                                "fontWeight": "900",
                                "letterSpacing": "-1px"
                            }),
+                    html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
                     html.P("Analyse des performances et métriques clés", 
                           style={"fontSize": "20px", "opacity": "0.9", "fontWeight": "300"})
                 ], style={"textAlign": "center"})
@@ -516,7 +517,7 @@ def render_page(tab):
             # Header
             html.Div([
                 html.Div([
-                    html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
+                    
                     html.H2("📊 Visualisations Avancées", 
                            style={
                                "fontSize": "52px", 
@@ -524,6 +525,7 @@ def render_page(tab):
                                "fontWeight": "900",
                                "letterSpacing": "-1px"
                            }),
+                    html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
                     html.P("Analyse graphique du ressenti et des tendances clients", 
                           style={"fontSize": "20px", "opacity": "0.9", "fontWeight": "300"})
                 ], style={"textAlign": "center"})
@@ -657,7 +659,7 @@ def render_page(tab):
             # Header
             html.Div([
                 html.Div([
-                    html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
+                    
                     html.H2("🔍 Exploration Détaillée", 
                            style={
                                "fontSize": "52px", 
@@ -665,6 +667,7 @@ def render_page(tab):
                                "fontWeight": "900",
                                "letterSpacing": "-1px"
                            }),
+                    html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
                     html.P("Analyse granulaire des commentaires et interactions clients", 
                           style={"fontSize": "20px", "opacity": "0.9", "fontWeight": "300"})
                 ], style={"textAlign": "center"})
@@ -839,10 +842,11 @@ def render_page(tab):
         content = [
             # ===== Hero =====
             html.Div([
-                html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
+                
                 html.H2("📝 Posts Récents", 
                        style={"fontSize": "42px", "marginBottom": "10px"}),
-                html.P("Observatoire Libre des Banques ", 
+                html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
+                html.P("Dans le groupe ( Observatoire Libre des Banques )", 
                       style={"fontSize": "18px", "opacity": "0.9", "fontWeight": "300"})
             ], style={**hero_section, "textAlign": "center", "padding": "40px"})
 
@@ -1055,7 +1059,7 @@ def creer_nouveau_graph(clickData, sources):
 
     # Récupère la date cliquée
     selected_date = clickData['points'][0]['x']
-    filtered_absa = absa_df[(absa_df['source'].isin(sources)) & (absa_df['date'] == selected_date)]
+    filtered_absa = absa_df[(absa_df['source']=="page_sgci") & (absa_df['date'] == selected_date)]
 
     if filtered_absa.empty:
         return html.Div(f"Aucun commentaire trouvé pour le {selected_date}.")

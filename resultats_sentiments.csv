@@ -16799,3 +16799,47 @@ comment se désabonner à un produit qui nous arrange plus ?",page_SIB,2025-09-2
 2025-09-30,Gertrude Alizée,Blessing Way,page_BACI,2025-09-30,NEGATIVE,0.5896881222724915,blessing way
 2025-09-29,Diornel Orlane Mel,Sehia Biazo Ferdinand,page_BACI,2025-09-29,POSITIVE,0.629307746887207,sehia biazo ferdinand
 2025-09-30,Hakim Tahirou Wizzman,Marius Traore,page_BACI,2025-09-30,POSITIVE,0.60658860206604,marius traore
+2025-09-27,Adjoua Evelyne Kouakou,"Vendredi 26 septembre 2025,un des agents qui passent déposer l'argent à votre banque dans les véhicules blandé(le logo est jaune) a été très irrespectueux avec moi au niveau de l'agence Abatta à 12h50 par là.",page_sgci,2025-09-27,NEGATIVE,0.6595051884651184,vendredi 26 septembre 2025 un des agents qui passent déposer l argent à votre banque dans les véhicules blandé le logo est jaune a été très irrespectueux avec moi au niveau de l agence abatta à 12h50 par là
+2025-09-26,Kouassi Franck Wilson,"Vos agents de Bouaké ont égaré mon chèque et aucune assistance de votre part pour le retrouver ,",page_sgci,2025-09-26,NEGATIVE,0.8804695010185242,vos agents de bouaké ont égaré mon chèque et aucune assistance de votre part pour le retrouver
+2025-09-29,Armand Koffi,"C'est quoi le rôle des gestionnaires de compte sgci ?
+Société Générale Côte d’Ivoire",page_sgci,2025-09-29,NEGATIVE,0.6160662770271301,c est quoi le rôle des gestionnaires de compte sgci société générale côte d ivoire
+2025-09-29,Fode Maguiraga,"Merci a la SGCI, c'est magnifique",page_sgci,2025-09-29,POSITIVE,0.9641496539115906,merci a la sgci c est magnifique
+2025-09-27,Yobouet Mike Stephen,"Anne Malaika
+s'est ouverte jusqu'en novembre",page_sgci,2025-09-27,NEGATIVE,0.5122994184494019,anne malaika s est ouverte jusqu en novembre
+2025-09-25,L'enfant Du Nord Wamouchalakamah,"Société Générale Côte d’Ivoire
+si aujourd'hui vous faites dimes a votre abonné cest rien",page_sgci,2025-09-25,NEGATIVE,0.869228720664978,société générale côte d ivoire si aujourd hui vous faites dimes a votre abonné cest rien
+2025-09-25,Trône De Fer,Virer nos mouvements on va vaquer à nos occupations c'est la rentrée vous faites trop malin tchai,page_sgci,2025-09-25,NEGATIVE,0.8298203349113464,virer nos mouvements on va vaquer à nos occupations c est la rentrée vous faites trop malin tchai
+2025-10-02,Rita Yaké,Merci et bon mois d'octobre à tous,page_ecobank,2025-10-02,POSITIVE,0.7960526943206787,merci et bon mois d octobre à tous
+2025-10-02,Atsouayawo Aziadzonou,Merci pareille à vous.,page_ecobank,2025-10-02,POSITIVE,0.586574912071228,merci pareille à vous
+2025-10-01,Marius Akie,"Bjr nsia, service client inaccessible vu la longueur d'attente pour avoir un conseiller pfffff",page_NSIA,2025-10-01,NEGATIVE,1.0,bjr nsia service client inaccessible vu la longueur d attente pour avoir un conseiller pfffff
+2025-10-02,Adama Kde,"Marius Akie
+je confirme votre information",page_NSIA,2025-10-02,POSITIVE,0.7468335628509521,marius akie je confirme votre information
+2025-10-02,Evaristh Bleu,"Bonjour NSIA, j'attends une réponse a ma réclamation depuis...",page_NSIA,2025-10-02,NEGATIVE,0.8106222748756409,bonjour nsia j attends une réponse a ma réclamation depuis
+2025-09-30,Cissé Ali Bancongo Cissé,Dieu merci ses ce que nous voulons voir notre banque bien placé,page_NSIA,2025-09-30,POSITIVE,0.9348269701004028,dieu merci ses ce que nous voulons voir notre banque bien placé
+2025-10-02,Bôyô Mou,Merciiiii,page_BNI,2025-10-02,POSITIVE,0.6801872849464417,merciiiii
+2025-10-02,Korossayé Ouattara,Merci.,page_BNI,2025-10-02,NEGATIVE,0.5325833559036255,merci
+2025-10-02,Diawara Issiaka Makan Bonheur,Octobre rose,page_BNI,2025-10-02,POSITIVE,0.6292483806610107,octobre rose
+2025-10-01,Aubin Esmel,"L'arrimage SIB-Wave pourra nous sauver aussi la vie en Octobre
+. Ça peut être SIBeau avec wave n'est ce pas ?.",page_SIB,2025-10-01,POSITIVE,0.7991240620613098,l arrimage sib wave pourra nous sauver aussi la vie en octobre ça peut être sibeau avec wave n est ce pas
+2025-10-02,Bema Ouattara,Qu'arrive t'il à mon dossier de prêt scolaire pardonner donné moi mon argent c'est pas de l'aumône que je demande,page_SIB,2025-10-02,NEGATIVE,0.5379593372344971,qu arrive t il à mon dossier de prêt scolaire pardonner donné moi mon argent c est pas de l aumône que je demande
+2025-10-01,Abdoul Aziz Gnali,"Société Générale Côte d’Ivoire
+L'interopérabilité, où en sommes-nous nous?",page_sgci,2025-10-01,NEGATIVE,0.5065196752548218,société générale côte d ivoire l interopérabilité où en sommes nous nous
+2025-10-01,Souleymane Coulibaly,"Société Générale Côte d’Ivoire
+j'ai besoin d'un conseiller.",page_sgci,2025-10-01,NEGATIVE,0.5837662816047668,société générale côte d ivoire j ai besoin d un conseiller
+2025-10-01,Dura Lex Sed Lex,"Ecobank Côte d'Ivoire
+vous pouvez donner plus de détails sur votre histoire de banque à distance et combien cela s'élève ?.",page_ecobank,2025-10-01,POSITIVE,0.5887531638145447,ecobank côte d ivoire vous pouvez donner plus de détails sur votre histoire de banque à distance et combien cela s élève
+2025-10-02,Parfait Ngoran,Comment créer un alias PISPI avec Ecobank Mobile???,page_ecobank,2025-10-02,NEGATIVE,0.6226848363876343,comment créer un alias pispi avec ecobank mobile
+2025-09-28,Paul Fabrice Achio,Quelles sont les dispositions à prendre pour un planteur qui désire bénéficier de ces fonds,page_BNI,2025-09-28,NEGATIVE,0.6499125957489014,quelles sont les dispositions à prendre pour un planteur qui désire bénéficier de ces fonds
+2025-09-30,Diawara Issiaka Makan Bonheur,Bonne nouvelle,page_BNI,2025-09-30,NEGATIVE,0.5727190375328064,bonne nouvelle
+2025-09-28,Ange Mleï,Très belle initiative,page_BNI,2025-09-28,POSITIVE,0.9222589135169983,très belle initiative
+2025-09-28,Annabelle Tohan Lou,Hummmm je passe oooh,page_BNI,2025-09-28,NEGATIVE,0.8266683220863342,hummmm je passe oooh
+2025-10-01,Hubert Yao N'guessan,Cest combien le kg,page_BNI,2025-10-01,NEGATIVE,0.7129243612289429,cest combien le kg
+2025-09-27,Tores Seko,"Quand vous allez finir, implantez des agences dans certaines villes qui n'en n'ont pas telles que ADZOPÉ,AGNIBILEKRO, etc. Merci les micros finances ont des agences, arrêtez de nous fatiguer avec vos guichets qui ont toujours des problèmes",page_BNI,2025-09-27,NEGATIVE,0.8307139873504639,quand vous allez finir implantez des agences dans certaines villes qui n en n ont pas telles que adzopé agnibilekro etc merci les micros finances ont des agences arrêtez de nous fatiguer avec vos guichets qui ont toujours des problèmes
+2025-09-28,Onyma Yobenis,"BNI Agence JOSEPH ANOMA du Plateau où l'administration n'est nullement pas une continuité mais plutôt une affaire de personne et voir le chef d'agence constitue un véritable parcours du combattant,un leurre ou une vraie utopie",page_BNI,2025-09-28,NEGATIVE,1.0,bni agence joseph anoma du plateau où l administration n est nullement pas une continuité mais plutôt une affaire de personne et voir le chef d agence constitue un véritable parcours du combattant un leurre ou une vraie utopie
+2025-09-30,Diawara Issiaka Makan Bonheur,Epargne epaargne epargne,page_BNI,2025-09-30,NEGATIVE,0.5199123620986938,epargne epaargne epargne
+2025-09-30,Saturnin Koffi,Il faut combien de temps après ouverture de compte courant pour avoir accès à un prêt,page_BNI,2025-09-30,NEGATIVE,0.6908589601516724,il faut combien de temps après ouverture de compte courant pour avoir accès à un prêt
+2025-09-27,Josiane Bly Epse Bamba,BNI je suis très découragée de vous. Grand merci au chef d'agence de Bondonkou pour son sens d'écoute.,page_BNI,2025-09-27,NEGATIVE,0.8562213778495789,bni je suis très découragée de vous grand merci au chef d agence de bondonkou pour son sens d écoute
+2025-09-30,Dorgelès Tape,Mais esque avec recipise on peut ouvri compte,page_BNI,2025-09-30,NEGATIVE,1.0,mais esque avec recipise on peut ouvri compte
+2025-09-30,Dorgelès Tape,"Svp je suis un element de
+PUISSANCE 6
+je veux ouvri mon compte quel dossier on fournier",page_BNI,2025-09-30,POSITIVE,0.759502649307251,svp je suis un element de puissance 6 je veux ouvri mon compte quel dossier on fournier

@@ -668,12 +668,12 @@ def render_page(tab):
                                "letterSpacing": "-1px"
                            }),
                     html.Div("━━", style={"color": SG_WHITE, "fontSize": "32px", "marginBottom": "15px", "opacity": "0.8"}),
-                    html.P("Analyse granulaire des commentaires et interactions clients", 
+                    html.P("Analyse granulaire des commentaires par typologie", 
                           style={"fontSize": "20px", "opacity": "0.9", "fontWeight": "300"})
                 ], style={"textAlign": "center"})
             ], style=hero_section),
 
-            # Filtres avancés
+            # Filtres avancés 
             html.Div([
                 html.Div([
                     html.Div("🎛️", style={"fontSize": "28px", "marginBottom": "20px"}),

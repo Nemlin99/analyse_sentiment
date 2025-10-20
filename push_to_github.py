@@ -8,7 +8,7 @@ def main():
         "absa_df.csv",
         "kpis.json",
         "requirement.txt",
-        "postes.csv",
+         "postes.csv",
         "app.py"
     ]
 

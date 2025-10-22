@@ -307,6 +307,7 @@ def process_data(path_concatene="facebook_commentaires_concatene.csv", path_post
     }
 
     # Sauvegardes locales
+    
     df.to_csv("resultats_sentiments.csv", index=False)
     df_postes.to_csv("postes.csv", index=False)
     with open("kpis.json", "w") as f:

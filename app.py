@@ -72,15 +72,29 @@ server = app.server
 
 # Menu principal
 app.layout = html.Div([
-    dcc.Tabs(id="tabs", value="home", children=[
-        dcc.Tab(label="🏠 Accueil", value="home"),
-        dcc.Tab(label="📈 Statistiques Générales", value="stats"),
-        dcc.Tab(label="📊 Analyses Graphiques", value="viz"),
-        dcc.Tab(label="🔍 Détails des commentaires", value="details"),
-        dcc.Tab(label="📝 Posts divers", value="posts"),
-    ]),
+    dcc.Tabs(
+        id="tabs",
+        value="home",
+        children=[
+            dcc.Tab(label="🏠 Accueil", value="home"),
+            dcc.Tab(label="📈 Statistiques Générales", value="stats"),
+            dcc.Tab(label="📊 Analyses Graphiques", value="viz"),
+
+            # 🔥 Onglet stylé avec badge rouge via style et pseudo-élément CSS
+            dcc.Tab(
+                label="🔍 Détails des commentaires",
+                value="details",
+                className="tab-alert"
+            ),
+
+            dcc.Tab(label="📝 Posts divers", value="posts"),
+        ],
+        style={"fontWeight": "600", "fontSize": "16px"}
+    ),
     html.Div(id="content")
 ])
+
+
 
 # ========================
 # 4. Callbacks pour pages

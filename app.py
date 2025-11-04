@@ -713,8 +713,8 @@ def render_page(tab):
                                  }),
                         dcc.Dropdown(
                             id="details-date",
-                            options=[{"label": "Toutes", "value": "Toutes"}] +
-                                    [{"label": d, "value": d} for d in sorted(absa_df['date'].unique())],
+                           options=[{"label": "Toutes", "value": "Toutes"}] +
+                                    [{"label": d, "value": d} for d in sorted(absa_df['date'].unique(), reverse=True)],
                             value="Toutes",
                             clearable=False
                         )
@@ -1093,6 +1093,7 @@ def creer_nouveau_graph(clickData, sources):
 
     return dcc.Graph(figure=fig_aspects)
 
+
 @app.callback(
     Output("details-table", "data"),
     [Input("details-date", "value"),
@@ -1103,6 +1104,7 @@ def creer_nouveau_graph(clickData, sources):
 def filter_details(date_filter, source_filter, aspect_filter, sentiment_filter):
     filtered_df = absa_df.copy()
 
+    # Appliquer les filtres
     if source_filter != "Toutes":
         filtered_df = filtered_df[filtered_df['source'] == source_filter]
     if aspect_filter != "Toutes":
@@ -1112,7 +1114,11 @@ def filter_details(date_filter, source_filter, aspect_filter, sentiment_filter):
     if date_filter != "Toutes":
         filtered_df = filtered_df[filtered_df["date"] == date_filter]
 
+    # Trier par date décroissante (plus récentes en premier)
+    filtered_df = filtered_df.sort_values(by="date", ascending=False)
+
     return filtered_df[["date", "auteur", "phrase", "aspect"]].to_dict("records")
+
 
 
 # 5. Lancement
